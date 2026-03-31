@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'shark-tunnel-tracker',
   title: 'Shark Tunnel Tracker',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
-  dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
+  projectId: 'w1cjzznh',
+  dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
 

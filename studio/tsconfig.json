@@ -9,5 +9,6 @@
     "skipLibCheck": true,
     "lib": ["ES2017", "DOM", "DOM.Iterable"]
   },
-  "include": ["."]
+  "include": ["."],
+  "exclude": ["node_modules", ".sanity", "dist"]
 }

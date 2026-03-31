@@ -1,6 +1,7 @@
 import { Header } from './components/layout/Header'
 import { Layout } from './components/layout/Layout'
 import { RouteMap } from './components/map/RouteMap'
+import { FeedPanel } from './components/feed/FeedPanel'
 import { StopModal } from './components/stops/StopModal'
 import { AppProvider, useAppContext } from './context/AppContext'
 
@@ -19,12 +20,7 @@ function AppInner() {
             />
           </div>
         }
-        feed={
-          <div style={{ padding: '2rem', color: 'var(--color-purple-deep)' }}>
-            <h2>📰 Feed coming soon</h2>
-            <p>FeedPanel will render here.</p>
-          </div>
-        }
+        feed={<FeedPanel />}
       />
       <StopModal />
     </>

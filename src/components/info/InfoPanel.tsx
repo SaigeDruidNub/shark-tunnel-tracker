@@ -3,13 +3,27 @@ import { sanityImageUrl } from "../../lib/sanity/imageUrl";
 import { PhotoSubmissionForm } from "../photos/PhotoSubmissionForm";
 import styles from "./InfoPanel.module.css";
 
+function toYouTubeThumbnailUrl(watchUrl: string): string | null {
+  try {
+    const url = new URL(watchUrl);
+    if (!url.hostname.includes("youtube") && !url.hostname.includes("youtu.be")) return null;
+    const videoId =
+      url.searchParams.get("v") ??
+      url.pathname.split("/").filter(Boolean).pop() ??
+      "";
+    return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+  } catch {
+    return null;
+  }
+}
+
 function CommunityGalleryCard({
   onViewGallery,
 }: {
   onViewGallery: () => void;
 }) {
   const { data, isPending } = usePhotoSubmissions();
-  const previews = data?.slice(0, 4) ?? [];
+  const previews = data?.slice(0, 2) ?? [];
 
   return (
     <div className={styles.cardInner}>
@@ -36,16 +50,20 @@ function CommunityGalleryCard({
                   .fit("crop")
                   .format("webp")
                   .url()
-              : null;
+              : item.videoUrl ? toYouTubeThumbnailUrl(item.videoUrl) : null;
+            const isVideo = Boolean(item.videoUrl);
             return (
               <div key={item._id} className={styles.previewThumb}>
                 {url ? (
-                  <img
-                    src={url}
-                    alt={item.caption}
-                    className={styles.previewImg}
-                    loading="lazy"
-                  />
+                  <>
+                    <img
+                      src={url}
+                      alt={item.caption}
+                      className={styles.previewImg}
+                      loading="lazy"
+                    />
+                    {isVideo && <span className={styles.previewVideoOverlay}>▶</span>}
+                  </>
                 ) : (
                   <div className={styles.previewVideo}>▶</div>
                 )}

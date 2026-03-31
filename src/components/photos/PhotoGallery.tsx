@@ -9,13 +9,27 @@ function stopNameById(id: string): string {
   return match ? `${match.name}, ${match.state}` : id
 }
 
+function toYouTubeThumbnailUrl(watchUrl: string): string | null {
+  try {
+    const url = new URL(watchUrl)
+    if (!url.hostname.includes('youtube') && !url.hostname.includes('youtu.be')) return null
+    const videoId =
+      url.searchParams.get('v') ??
+      url.pathname.split('/').filter(Boolean).pop() ??
+      ''
+    return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null
+  } catch {
+    return null
+  }
+}
+
 function SubmissionCard({ item }: { item: PhotoSubmission }) {
   const hasImage = Boolean(item.image)
   const hasVideo = Boolean(item.videoUrl)
 
   const imageUrl = hasImage
     ? sanityImageUrl(item.image!).width(600).height(400).fit('crop').format('webp').url()
-    : null
+    : hasVideo ? toYouTubeThumbnailUrl(item.videoUrl!) : null
 
   const submittedDate = new Date(item.submittedAt).toLocaleDateString('en-US', {
     month: 'short',
@@ -35,12 +49,7 @@ function SubmissionCard({ item }: { item: PhotoSubmission }) {
             loading="lazy"
             decoding="async"
           />
-        </div>
-      )}
-
-      {!imageUrl && hasVideo && (
-        <div className={styles.videoPlaceholder} aria-hidden="true">
-          <span className={styles.videoIcon}>▶</span>
+          {hasVideo && <span className={styles.videoOverlay}>▶</span>}
         </div>
       )}
 

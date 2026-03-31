@@ -34,6 +34,7 @@
   aspect-ratio: 3 / 2;
   overflow: hidden;
   background: #eee;
+  position: relative;
 }
 
 .image {
@@ -43,18 +44,17 @@
   display: block;
 }
 
-.videoPlaceholder {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  background: var(--color-purple-deep, #2e1b69);
+.videoOverlay {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.videoIcon {
-  font-size: 2.5rem;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 0 8px rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.18);
+  pointer-events: none;
 }
 
 .cardBody {

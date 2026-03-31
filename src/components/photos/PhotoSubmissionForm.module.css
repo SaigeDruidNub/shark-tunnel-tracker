@@ -27,14 +27,42 @@
   margin: 0;
 }
 
+/* ── Two-column form body ───────────────────────────────── */
+.formBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1 1 auto;
+}
+
+.dropzoneCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+@media (min-width: 500px) {
+  .formBody {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .dropzoneCol {
+    flex: 0 0 110px;
+    align-self: stretch;
+  }
+}
+
 /* ── Dropzone ───────────────────────────────────────────── */
 .dropzone {
   border: 2px dashed var(--color-purple-brand);
   border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2);
   cursor: pointer;
   transition: background var(--duration-fast), border-color var(--duration-fast);
   background: rgba(255, 255, 255, 0.5);
+  flex: 1 1 auto;
+  display: flex;
 }
 
 .dropzone:hover {
@@ -49,30 +77,50 @@
 
 .dropzoneLabel {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  justify-content: center;
+  gap: var(--space-2);
   cursor: pointer;
   width: 100%;
+  text-align: center;
 }
 
 .uploadIconBox {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background: var(--color-purple-brand);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--color-white);
   flex-shrink: 0;
 }
 
 .dropzoneText {
-  font-size: var(--text-sm);
+  font-size: 0.7rem;
   color: var(--color-text-muted);
-  line-height: 1.4;
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.fieldsCol {
+  flex: 1 1 0;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+@media (min-width: 500px) {
+  .fieldsCol {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .hiddenInput {
@@ -89,14 +137,6 @@
   font-size: var(--text-xs);
   color: var(--color-text-muted);
   text-align: center;
-  margin-top: calc(-1 * var(--space-1));
-}
-
-/* ── Field grid ─────────────────────────────────────────── */
-.fieldsGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2) var(--space-3);
 }
 
 .field {

@@ -1,0 +1,77 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-white);
+  border-bottom: 3px solid var(--color-purple-brand);
+  box-shadow: var(--shadow-sm);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  height: var(--header-height);
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding-inline: var(--space-6);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  line-height: 1;
+}
+
+.logoKid {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-purple-deep);
+  letter-spacing: -0.02em;
+}
+
+.logoWind {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-purple-brand);
+  letter-spacing: -0.02em;
+}
+
+.logoSeparator {
+  color: var(--color-gray-300);
+  font-size: var(--text-lg);
+  margin-inline: var(--space-2);
+}
+
+.appName {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-purple-deep);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .logoSeparator,
+  .appName {
+    display: none;
+  }
+}
+
+/* Live banner below the header bar */
+.banner {
+  background-color: var(--color-teal);
+  color: var(--color-purple-deep);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-sm);
+  text-align: center;
+  padding: var(--space-2) var(--space-4);
+}

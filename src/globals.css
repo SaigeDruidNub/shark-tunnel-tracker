@@ -1,0 +1,344 @@
+/* ============================================================
+   Shark Tunnel Tracker — Global Design Tokens & Base Styles
+   Brand: KidWind
+   ============================================================ */
+
+/* ── Color Tokens ─────────────────────────────────────────── */
+:root {
+  /* KidWind brand purples */
+  --color-purple-deep:    #2E1B69; /* headings, body text on light bg */
+  --color-purple-brand:   #4527A0; /* primary brand purple, section fills */
+  --color-purple-light:   #6B4AC9; /* hover states, secondary elements */
+  --color-purple-wash:    #EDE8FC; /* tinted backgrounds, card borders */
+
+  /* Coral / CTA */
+  --color-coral:          #F05030; /* primary CTA buttons */
+  --color-coral-hover:    #D43F20; /* button hover */
+  --color-coral-light:    #FDE8E4; /* coral tint for tags/badges */
+
+  /* Teal / accent */
+  --color-teal:           #00C8B4; /* accent banners, highlights */
+  --color-teal-hover:     #00A898; /* teal hover */
+  --color-teal-light:     #D0F5F1; /* teal tint */
+
+  /* Neutrals */
+  --color-white:          #FFFFFF;
+  --color-off-white:      #F8F7FF; /* page background — warm purple tint */
+  --color-gray-100:       #F0EEF8;
+  --color-gray-300:       #C4BEDF;
+  --color-gray-500:       #7B72A8;
+  --color-gray-700:       #3D3560;
+  --color-black:          #100829;
+
+  /* Semantic aliases */
+  --color-text:           var(--color-purple-deep);
+  --color-text-muted:     var(--color-gray-500);
+  --color-text-on-dark:   var(--color-white);
+  --color-text-on-coral:  var(--color-white);
+  --color-bg-page:        var(--color-off-white);
+  --color-bg-card:        var(--color-white);
+  --color-bg-section:     var(--color-purple-brand);
+  --color-border:         var(--color-gray-300);
+  --color-focus-ring:     var(--color-teal);
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-sans: "Nunito", "Fredoka One", "Rounded Mplus 1c", ui-rounded, system-ui, sans-serif;
+  --font-display: "Fredoka One", "Nunito", ui-rounded, system-ui, sans-serif;
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+  --text-5xl:  3rem;      /* 48px */
+
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+
+  --font-weight-normal:    400;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --font-weight-extrabold: 800;
+
+  /* ── Spacing ─────────────────────────────────────────────── */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+
+  /* ── Radii ───────────────────────────────────────────────── */
+  --radius-sm:   0.375rem;  /*  6px */
+  --radius-md:   0.75rem;   /* 12px */
+  --radius-lg:   1.25rem;   /* 20px */
+  --radius-xl:   2rem;      /* 32px — pill / badge */
+  --radius-full: 9999px;
+
+  /* ── Shadows ─────────────────────────────────────────────── */
+  --shadow-sm:  0 1px 3px 0 rgb(46 27 105 / 0.12);
+  --shadow-md:  0 4px 12px 0 rgb(46 27 105 / 0.15);
+  --shadow-lg:  0 8px 24px 0 rgb(46 27 105 / 0.18);
+  --shadow-card: 0 2px 8px 0 rgb(46 27 105 / 0.10), 0 0 0 1px rgb(46 27 105 / 0.06);
+
+  /* ── Motion ──────────────────────────────────────────────── */
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+  --ease-bounce:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Layout ──────────────────────────────────────────────── */
+  --max-width-content: 1280px;
+  --map-panel-min-width: 320px;
+  --feed-panel-width: 360px;
+  --header-height: 64px;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+  background-color: var(--color-bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Skip nav (accessibility) ────────────────────────────── */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 9999;
+  padding: var(--space-2) var(--space-6);
+  background: var(--color-coral);
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: top var(--duration-fast) var(--ease-out);
+}
+
+.skip-nav:focus {
+  top: var(--space-4);
+}
+
+/* ── Focus ring ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Typography base ─────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--color-purple-deep);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-base); }
+
+p {
+  line-height: var(--leading-normal);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-purple-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast);
+}
+
+a:hover {
+  color: var(--color-purple-light);
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ── Button components ───────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  border-radius: var(--radius-xl);
+  border: 2px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color     var(--duration-fast) var(--ease-out),
+    color            var(--duration-fast) var(--ease-out),
+    transform        var(--duration-fast) var(--ease-bounce),
+    box-shadow       var(--duration-fast) var(--ease-out);
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: var(--color-coral);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-coral-hover);
+  color: var(--color-white);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-coral);
+  border-color: var(--color-coral);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-coral);
+  color: var(--color-white);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-purple-deep);
+  border-color: var(--color-purple-light);
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-purple-wash);
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* ── Badge / tag ─────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+}
+
+.badge-teal {
+  background-color: var(--color-teal);
+  color: var(--color-purple-deep);
+}
+
+.badge-coral {
+  background-color: var(--color-coral-light);
+  color: var(--color-coral-hover);
+}
+
+.badge-purple {
+  background-color: var(--color-purple-wash);
+  color: var(--color-purple-brand);
+}
+
+/* ── Section banner (WHAT'S NEW style) ───────────────────── */
+.section-banner {
+  display: inline-block;
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-4);
+  background: var(--color-teal);
+  color: var(--color-purple-deep);
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
+}
+
+/* ── Responsive layout helpers ───────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-inline: var(--space-8);
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

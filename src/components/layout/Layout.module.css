@@ -1,0 +1,51 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--header-height));
+  max-width: var(--max-width-content);
+  margin-inline: auto;
+  width: 100%;
+}
+
+.mapPanel {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  /* Remove default focus outline — focus is managed by skip-nav */
+  outline: none;
+}
+
+.mapPanel > * {
+  flex: 1 1 auto;
+}
+
+.feedPanel {
+  flex: 0 0 auto;
+  width: 100%;
+  border-top: 2px solid var(--color-border);
+  background-color: var(--color-white);
+  overflow-y: auto;
+}
+
+/* ── Desktop: side-by-side ──────────────────────────────── */
+@media (min-width: 900px) {
+  .layout {
+    flex-direction: row;
+    height: calc(100dvh - var(--header-height));
+    overflow: hidden;
+  }
+
+  .mapPanel {
+    overflow-y: auto;
+  }
+
+  .feedPanel {
+    flex: 0 0 var(--feed-panel-width);
+    width: var(--feed-panel-width);
+    min-width: var(--map-panel-min-width);
+    border-top: none;
+    border-left: 2px solid var(--color-border);
+    overflow-y: auto;
+  }
+}

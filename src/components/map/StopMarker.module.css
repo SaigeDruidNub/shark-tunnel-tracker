@@ -1,0 +1,33 @@
+.marker {
+  cursor: default;
+  outline: none;
+}
+
+.marker[data-status='unlocked'],
+.marker[data-status='active'] {
+  cursor: pointer;
+}
+
+/* Focus ring for keyboard nav — drawn as SVG outline on the outer circle */
+.marker[data-status='unlocked']:focus-visible circle:first-of-type,
+.marker[data-status='active']:focus-visible circle:first-of-type {
+  outline: none;
+  filter: drop-shadow(0 0 0 3px #fff) drop-shadow(0 0 0 5px #f0b429);
+}
+
+/* Reduced-motion: skip the pulse animation */
+@keyframes pulse {
+  0%   { r: 20; opacity: 0.7; }
+  70%  { r: 30; opacity: 0; }
+  100% { r: 30; opacity: 0; }
+}
+
+.pulse {
+  animation: pulse 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}

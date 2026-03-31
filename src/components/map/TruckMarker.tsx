@@ -1,5 +1,5 @@
-import sharkTruck from '../../assets/sharkTruck.png';
-import styles from './TruckMarker.module.css';
+import sharkTruck from "../../assets/sharkTruck.png";
+import styles from "./TruckMarker.module.css";
 
 interface TruckMarkerProps {
   /** SVG user-unit coordinates resolved by RouteMap via getPointAtLength() */
@@ -21,7 +21,7 @@ export function TruckMarker({ x, y, isMoving }: TruckMarkerProps) {
     <g
       className={styles.truck}
       style={{ transform: `translate(${x}px, ${y}px)` }}
-      aria-label={isMoving ? 'Shark tunnel in transit' : 'Shark tunnel stopped'}
+      aria-label={isMoving ? "Shark tunnel in transit" : "Shark tunnel stopped"}
       role="img"
     >
       {/* Drop shadow */}
@@ -39,7 +39,13 @@ export function TruckMarker({ x, y, isMoving }: TruckMarkerProps) {
 
       {/* Motion lines when moving */}
       {isMoving && (
-        <g className={styles.motion} stroke="#9cd0ef" strokeWidth="3" strokeLinecap="round" opacity="0.7">
+        <g
+          className={styles.motion}
+          stroke="#9cd0ef"
+          strokeWidth="3"
+          strokeLinecap="round"
+          opacity="0.7"
+        >
           <line x1="82" y1="-10" x2="98" y2="-10" />
           <line x1="82" y1="0" x2="94" y2="0" />
           <line x1="82" y1="10" x2="96" y2="10" />

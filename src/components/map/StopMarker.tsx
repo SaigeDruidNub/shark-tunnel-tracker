@@ -77,7 +77,7 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
         {stop.order}
       </text>
 
-      {/* City label — offset to avoid overlap with route */}
+      {/* City label — rendered twice: white outline behind, black text on top */}
       <text
         x={18}
         dy="1"
@@ -85,7 +85,25 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
           fontFamily: 'Inter, Arial, sans-serif',
           fontWeight: 700,
           fontSize: 15,
-          fill: status === 'locked' ? '#8e9aaa' : '#1d1d1d',
+          fill: 'none',
+          stroke: 'white',
+          strokeWidth: 4,
+          strokeLinejoin: 'round',
+          dominantBaseline: 'middle',
+          pointerEvents: 'none',
+          userSelect: 'none',
+        }}
+      >
+        {stop.name}
+      </text>
+      <text
+        x={18}
+        dy="1"
+        style={{
+          fontFamily: 'Inter, Arial, sans-serif',
+          fontWeight: 700,
+          fontSize: 15,
+          fill: '#1d1d1d',
           dominantBaseline: 'middle',
           pointerEvents: 'none',
           userSelect: 'none',

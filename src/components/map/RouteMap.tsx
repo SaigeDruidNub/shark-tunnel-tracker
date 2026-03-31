@@ -8,31 +8,29 @@ import type { StopStatus } from '../../types/stop';
 
 /**
  * Fractional positions [0..1] along the route path at each of the 8 stops.
- * Precomputed from the polyline segment lengths in MapSVG's route D string:
- * M1090 248 L1018 346 L950 414 L782 414 L748 465 L748 585 L708 633 L662 725 L564 812 L456 838
+ * Precomputed from MapSVG's route D string (mapBackground.png, 1152 × 922):
+ * M905 243 L875 285 L783 345 L630 387 L545 658 L440 680 L378 635 L290 680
  *
  * Segment lengths (Euclidean — exact for straight-line L commands):
- *   0→1 (mineral-point→dubuque):     ≈121.6
- *   1→2 (dubuque→cedar-rapids):      ≈ 96.2
- *   2→3 (waypoint):                  = 168.0
- *   3→4 (waypoint→des-moines):       ≈ 61.3
- *   4→5 (waypoint):                  = 120.0
- *   5→6 (waypoint→kansas-city):      ≈ 62.5
- *   6→7 (kansas-city→topeka):        ≈102.9
- *   7→8 (topeka→manhattan):          ≈131.0
- *   8→9 (manhattan→salina):          ≈111.1
- *   Total ≈ 974.6
+ *   0→1 (mineral-point→dubuque):   ≈ 51.6
+ *   1→2 (dubuque→cedar-rapids):    ≈109.8
+ *   2→3 (cedar-rapids→des-moines): ≈158.7
+ *   3→4 (des-moines→kansas-city):  ≈284.0
+ *   4→5 (kansas-city→topeka):      ≈107.3
+ *   5→6 (topeka→manhattan):        ≈ 76.6
+ *   6→7 (manhattan→salina):        ≈ 98.8
+ *   Total ≈ 886.8
  *
  * Cumulative fractions at each stop (stops[0..7]):
  */
 const STOP_PATH_FRACTIONS: readonly number[] = [
   0,      // mineral-point  (0)
-  0.125,  // dubuque        (121.6 / 974.6)
-  0.223,  // cedar-rapids   (217.8 / 974.6)
-  0.459,  // des-moines     (447.1 / 974.6)
-  0.646,  // kansas-city    (629.6 / 974.6)
-  0.752,  // topeka         (732.5 / 974.6)
-  0.886,  // manhattan      (863.5 / 974.6)
+  0.058,  // dubuque        ( 51.6 / 886.8)
+  0.182,  // cedar-rapids   (161.4 / 886.8)
+  0.361,  // des-moines     (320.1 / 886.8)
+  0.681,  // kansas-city    (604.1 / 886.8)
+  0.802,  // topeka         (711.4 / 886.8)
+  0.889,  // manhattan      (788.0 / 886.8)
   1.0,    // salina
 ];
 

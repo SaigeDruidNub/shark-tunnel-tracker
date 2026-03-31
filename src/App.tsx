@@ -6,6 +6,7 @@ import { FeedPanel } from "./components/feed/FeedPanel";
 import { StopModal } from "./components/stops/StopModal";
 import { InfoPanel } from "./components/info/InfoPanel";
 import { AppProvider, useAppContext } from "./context/AppContext";
+import { DebugClock } from "./components/debug/DebugClock";
 
 const GalleryPage = lazy(() =>
   import("./components/photos/GalleryPage").then((m) => ({
@@ -62,6 +63,7 @@ function AppInner() {
         feed={<FeedPanel />}
       />
       <StopModal />
+      <DebugClock />
       {state.showGallery && (
         <Suspense fallback={null}>
           <GalleryPage onClose={() => dispatch({ type: "CLOSE_GALLERY" })} />

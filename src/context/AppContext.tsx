@@ -7,9 +7,11 @@ interface AppState {
   selectedStopId: string | null;
   /** Whether the full community gallery overlay is visible. */
   showGallery: boolean;
+  /** Dev-only: overrides Date.now() for the truck position simulation. null = use real time. */
+  debugNow: Date | null;
 }
 
-const initialState: AppState = { selectedStopId: null, showGallery: false };
+const initialState: AppState = { selectedStopId: null, showGallery: false, debugNow: null };
 
 // ── Actions ──────────────────────────────────────────────────────────────────
 
@@ -17,7 +19,9 @@ type AppAction =
   | { type: "OPEN_STOP"; stopId: string }
   | { type: "CLOSE_STOP" }
   | { type: "OPEN_GALLERY" }
-  | { type: "CLOSE_GALLERY" };
+  | { type: "CLOSE_GALLERY" }
+  | { type: "SET_DEBUG_TIME"; date: Date }
+  | { type: "CLEAR_DEBUG_TIME" };
 
 function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
@@ -29,6 +33,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, showGallery: true };
     case "CLOSE_GALLERY":
       return { ...state, showGallery: false };
+    case "SET_DEBUG_TIME":
+      return { ...state, debugNow: action.date };
+    case "CLEAR_DEBUG_TIME":
+      return { ...state, debugNow: null };
     default:
       return state;
   }

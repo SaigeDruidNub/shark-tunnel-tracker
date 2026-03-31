@@ -1,6 +1,7 @@
 import { useRef, useLayoutEffect, useState } from 'react';
 import { stops } from '../../data/stops';
 import { useTruckPosition } from '../../hooks/useTruckPosition';
+import { useAppContext } from '../../context/AppContext';
 import { MapSVG } from './MapSVG';
 import { StopMarker } from './StopMarker';
 import { TruckMarker } from './TruckMarker';
@@ -61,7 +62,8 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
     }
   }, []);
 
-  const { legIndex, t, isMoving } = useTruckPosition();
+  const { state } = useAppContext();
+  const { legIndex, t, isMoving } = useTruckPosition(state.debugNow ?? undefined);
 
   // Map (legIndex, t) → SVG (x, y) via the ghost path element
   const truckPoint = (() => {
@@ -77,9 +79,10 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
 
   function getStopStatus(stopOrder: number, stopId: string): StopStatus {
     if (stopId === selectedStopId) return 'active';
-    // stop.order is 1-based; truck is currently on 0-based leg legIndex
-    // → stops with order ≤ legIndex + 1 have been departed from (unlocked)
-    if (stopOrder - 1 <= legIndex) return 'unlocked';
+    // When t === 1 the truck has arrived at the destination stop of legIndex,
+    // so treat it as having completed one extra leg for unlock purposes.
+    const effectiveLeg = legIndex + (t >= 1 ? 1 : 0);
+    if (stopOrder - 1 <= effectiveLeg) return 'unlocked';
     return 'locked';
   }
 

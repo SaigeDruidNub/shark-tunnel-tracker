@@ -1,0 +1,199 @@
+.root {
+  position: fixed;
+  bottom: var(--space-4);
+  right: var(--space-4);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+}
+
+/* ── Toggle button ─────────────────────────────────────────────────── */
+
+.toggle {
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(15, 10, 40, 0.82);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(6px);
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.toggle:hover {
+  background: rgba(30, 20, 70, 0.92);
+  color: #fff;
+}
+
+.toggleActive {
+  background: rgba(200, 60, 0, 0.88);
+  border-color: rgba(255, 120, 0, 0.5);
+  color: #fff;
+}
+
+.toggleActive:hover {
+  background: rgba(220, 80, 0, 0.95);
+}
+
+/* ── Panel ─────────────────────────────────────────────────────────── */
+
+.panel {
+  background: #0f0a28;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-width: 280px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+  color: #e0daf8;
+  animation: slideUp 140ms ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.activeBadge {
+  background: #c83c00;
+  color: #fff;
+  border-radius: var(--radius-full);
+  padding: 0.1rem 0.5rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+}
+
+/* ── Position readout ──────────────────────────────────────────────── */
+
+.posInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  color: #a0eac8;
+  line-height: 1.5;
+}
+
+.legNames {
+  color: rgba(160, 234, 200, 0.65);
+  font-size: 0.7rem;
+  text-transform: capitalize;
+}
+
+/* ── Input + buttons ───────────────────────────────────────────────── */
+
+.input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  color: #fff;
+  padding: 0.35rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  color-scheme: dark;
+}
+
+.input:focus {
+  outline: 2px solid #7c6ff7;
+  outline-offset: 1px;
+}
+
+.btnRow {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.applyBtn,
+.resetBtn {
+  flex: 1;
+  padding: 0.35rem 0;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: filter 120ms ease;
+}
+
+.applyBtn {
+  background: #4d40b2;
+  color: #fff;
+}
+
+.applyBtn:hover { filter: brightness(1.2); }
+
+.resetBtn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.resetBtn:hover { background: rgba(255, 255, 255, 0.18); color: #fff; }
+
+/* ── Quick jump grid ───────────────────────────────────────────────── */
+
+.quickSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.quickLabel {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.quickGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.quickBtn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-sm);
+  color: #c8c0f4;
+  padding: 0.2rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.quickBtn:hover {
+  background: rgba(124, 111, 247, 0.3);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel { animation: none; }
+}

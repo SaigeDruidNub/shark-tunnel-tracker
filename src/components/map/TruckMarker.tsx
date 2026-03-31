@@ -24,33 +24,48 @@ export function TruckMarker({ x, y, isMoving }: TruckMarkerProps) {
       aria-label={isMoving ? "Shark tunnel in transit" : "Shark tunnel stopped"}
       role="img"
     >
-      {/* Drop shadow */}
-      <ellipse cx="0" cy="38" rx="70" ry="8" fill="#000" opacity="0.12" />
+      {/* Inner group animates the bob — separate from the position transition */}
+      <g className={styles.bob}>
+        {/* Shark truck PNG — 160×80 units, centered horizontally, sitting on route point */}
+        <image
+          href={sharkTruck}
+          x="-80"
+          y="-65"
+          width="160"
+          height="100"
+          preserveAspectRatio="xMidYMid meet"
+        />
 
-      {/* Shark truck PNG — 160×80 units, centered horizontally, sitting on route point */}
-      <image
-        href={sharkTruck}
-        x="-80"
-        y="-65"
-        width="160"
-        height="100"
-        preserveAspectRatio="xMidYMid meet"
-      />
-
-      {/* Motion lines when moving */}
-      {isMoving && (
-        <g
-          className={styles.motion}
-          stroke="#9cd0ef"
-          strokeWidth="3"
-          strokeLinecap="round"
-          opacity="0.7"
-        >
-          <line x1="82" y1="-10" x2="98" y2="-10" />
-          <line x1="82" y1="0" x2="94" y2="0" />
-          <line x1="82" y1="10" x2="96" y2="10" />
-        </g>
-      )}
+        {/* Motion lines when moving — two passes for outline contrast */}
+        {isMoving && (
+          <>
+            {/* Outline pass: wide white stroke behind the color */}
+            <g
+              className={styles.motion}
+              stroke="white"
+              strokeWidth="6"
+              strokeLinecap="round"
+              opacity="0.75"
+            >
+              <line x1="72" y1="-28" x2="88" y2="-28" />
+              <line x1="72" y1="-18" x2="84" y2="-18" />
+              <line x1="72" y1="-8" x2="86" y2="-8" />
+            </g>
+            {/* Color pass: bright blue on top */}
+            <g
+              className={styles.motion}
+              stroke="#5bb8f5"
+              strokeWidth="3"
+              strokeLinecap="round"
+              opacity="1"
+            >
+              <line x1="72" y1="-28" x2="88" y2="-28" />
+              <line x1="72" y1="-18" x2="84" y2="-18" />
+              <line x1="72" y1="-8" x2="86" y2="-8" />
+            </g>
+          </>
+        )}
+      </g>
     </g>
   );
 }

@@ -1,3 +1,4 @@
-import { photoSubmission } from './photoSubmission'
+import { photoSubmission } from "./photoSubmission";
+import { stopRecap } from "./stopRecap";
 
-export const schemaTypes = [photoSubmission]
+export const schemaTypes = [photoSubmission, stopRecap];

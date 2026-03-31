@@ -45,7 +45,6 @@ function AppInner() {
           <GalleryPage onClose={() => dispatch({ type: "CLOSE_GALLERY" })} />
         </Suspense>
       )}
-      <StopModal />
     </>
   );
 }

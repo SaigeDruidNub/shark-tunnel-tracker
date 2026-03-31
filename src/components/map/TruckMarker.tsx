@@ -20,7 +20,7 @@ export function TruckMarker({ x, y, isMoving }: TruckMarkerProps) {
   return (
     <g
       className={styles.truck}
-      style={{ transform: `translate(${x}px, ${y}px)` }}
+      style={{ transform: `translate(${x}px, ${y}px)`, pointerEvents: "none" }}
       aria-label={isMoving ? "Shark tunnel in transit" : "Shark tunnel stopped"}
       role="img"
     >

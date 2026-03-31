@@ -1,20 +1,35 @@
-import { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
-import { stops } from '../../data/stops';
-import { useAppContext } from '../../context/AppContext';
-import styles from './StopModal.module.css';
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { stops } from "../../data/stops";
+import { useAppContext } from "../../context/AppContext";
+import { useStopRecap } from "../../hooks/useStopRecap";
+import styles from "./StopModal.module.css";
 
-/** Converts a youtube.com watch URL to a youtube-nocookie.com embed URL. */
-function toEmbedUrl(watchUrl: string): string {
+/** Converts a youtube.com watch URL to a youtube-nocookie.com embed URL. Returns null for non-YouTube. */
+function toYouTubeEmbedUrl(watchUrl: string): string | null {
   try {
     const url = new URL(watchUrl);
+    if (
+      !url.hostname.includes("youtube") &&
+      !url.hostname.includes("youtu.be")
+    ) {
+      return null;
+    }
     const videoId =
-      url.searchParams.get('v') ??
-      url.pathname.split('/').filter(Boolean).pop() ??
-      '';
-    return `https://www.youtube-nocookie.com/embed/${videoId}`;
+      url.searchParams.get("v") ??
+      url.pathname.split("/").filter(Boolean).pop() ??
+      "";
+    return videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : null;
   } catch {
-    return '';
+    return null;
+  }
+}
+
+function isSnapchat(url: string): boolean {
+  try {
+    return new URL(url).hostname.includes("snapchat");
+  } catch {
+    return false;
   }
 }
 
@@ -26,7 +41,10 @@ export function StopModal() {
   const { state, dispatch } = useAppContext();
   const { selectedStopId } = state;
 
-  const stop = selectedStopId ? stops.find((s) => s.id === selectedStopId) ?? null : null;
+  const stop = selectedStopId
+    ? (stops.find((s) => s.id === selectedStopId) ?? null)
+    : null;
+  const { data: recap } = useStopRecap(selectedStopId);
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -48,17 +66,19 @@ export function StopModal() {
     if (!stop) return;
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        dispatch({ type: 'CLOSE_STOP' });
+      if (e.key === "Escape") {
+        dispatch({ type: "CLOSE_STOP" });
         return;
       }
 
-      if (e.key !== 'Tab') return;
+      if (e.key !== "Tab") return;
 
       const dialog = dialogRef.current;
       if (!dialog) return;
 
-      const focusable = Array.from(dialog.querySelectorAll<HTMLElement>(FOCUSABLE));
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(FOCUSABLE),
+      );
       if (focusable.length === 0) return;
 
       const first = focusable[0];
@@ -77,29 +97,33 @@ export function StopModal() {
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [stop, dispatch]);
 
   // Prevent body scroll while open
   useEffect(() => {
     if (stop) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [stop]);
 
   if (!stop) return null;
 
-  const embedUrl = stop.videoUrl ? toEmbedUrl(stop.videoUrl) : null;
+  const videoUrl = recap?.videoUrl ?? stop.videoUrl;
+  const embedUrl = videoUrl ? toYouTubeEmbedUrl(videoUrl) : null;
+  const snapchat = videoUrl && !embedUrl && isSnapchat(videoUrl);
   const titleId = `stop-modal-title-${stop.id}`;
 
   return createPortal(
     <div
       className={styles.backdrop}
-      onClick={() => dispatch({ type: 'CLOSE_STOP' })}
+      onClick={() => dispatch({ type: "CLOSE_STOP" })}
       aria-hidden="true"
     >
       <div
@@ -122,7 +146,7 @@ export function StopModal() {
             ref={closeBtnRef}
             className={styles.closeBtn}
             aria-label="Close stop details"
-            onClick={() => dispatch({ type: 'CLOSE_STOP' })}
+            onClick={() => dispatch({ type: "CLOSE_STOP" })}
           >
             ✕
           </button>
@@ -131,6 +155,8 @@ export function StopModal() {
         {/* Body */}
         <div className={styles.body}>
           <p className={styles.description}>{stop.description}</p>
+
+          {recap?.blurb && <p className={styles.recapBlurb}>{recap.blurb}</p>}
 
           {embedUrl && (
             <div className={styles.videoWrapper}>
@@ -143,6 +169,17 @@ export function StopModal() {
                 className={styles.iframe}
               />
             </div>
+          )}
+
+          {snapchat && videoUrl && (
+            <a
+              href={videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.videoLink}
+            >
+              Watch on Snapchat ↗
+            </a>
           )}
         </div>
       </div>

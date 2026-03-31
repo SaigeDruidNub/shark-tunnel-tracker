@@ -1,5 +1,5 @@
-import type { Stop, StopStatus } from '../../types/stop';
-import styles from './StopMarker.module.css';
+import type { Stop, StopStatus } from "../../types/stop";
+import styles from "./StopMarker.module.css";
 
 interface StopMarkerProps {
   stop: Stop;
@@ -7,18 +7,19 @@ interface StopMarkerProps {
   onClick: () => void;
 }
 
-const STATUS_COLORS: Record<StopStatus, { outer: string; inner: string; text: string }> = {
-  locked:   { outer: '#8e9aaa', inner: '#c7d0db', text: '#555e6a' },
-  unlocked: { outer: '#2f5f95', inner: '#9cd0ef', text: '#111' },
-  active:   { outer: '#f0b429', inner: '#fff6dc', text: '#5a3a00' },
+const STATUS_COLORS: Record<
+  StopStatus,
+  { outer: string; inner: string; text: string }
+> = {
+  locked: { outer: "#8e9aaa", inner: "#c7d0db", text: "#555e6a" },
+  unlocked: { outer: "#2f5f95", inner: "#9cd0ef", text: "#111" },
+  active: { outer: "#f0b429", inner: "#fff6dc", text: "#5a3a00" },
 };
 
 export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
   const { outer, inner, text } = STATUS_COLORS[status];
-  const isInteractive = status !== 'locked';
-
   function handleKeyDown(e: React.KeyboardEvent) {
-    if (isInteractive && (e.key === 'Enter' || e.key === ' ')) {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       onClick();
     }
@@ -29,16 +30,15 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
       id={`marker-${stop.id}`}
       className={styles.marker}
       data-status={status}
-      role={isInteractive ? 'button' : undefined}
+      role="button"
       aria-label={`${stop.name}, ${stop.state} — ${status}`}
-      aria-disabled={!isInteractive}
-      tabIndex={isInteractive ? 0 : -1}
-      onClick={isInteractive ? onClick : undefined}
+      tabIndex={0}
+      onClick={onClick}
       onKeyDown={handleKeyDown}
       transform={`translate(${stop.svgX} ${stop.svgY})`}
     >
       {/* Active pulse ring */}
-      {status === 'active' && (
+      {status === "active" && (
         <circle
           r="24"
           fill="none"
@@ -53,7 +53,7 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
       <circle
         r="15"
         fill={outer}
-        stroke={status === 'active' ? '#b07800' : '#0f2236'}
+        stroke={status === "active" ? "#b07800" : "#0f2236"}
         strokeWidth="3"
       />
 
@@ -64,14 +64,14 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
       <text
         dy="1"
         style={{
-          fontFamily: 'Inter, Arial, sans-serif',
+          fontFamily: "Inter, Arial, sans-serif",
           fontWeight: 800,
           fontSize: 16,
           fill: text,
-          textAnchor: 'middle',
-          dominantBaseline: 'middle',
-          pointerEvents: 'none',
-          userSelect: 'none',
+          textAnchor: "middle",
+          dominantBaseline: "middle",
+          pointerEvents: "none",
+          userSelect: "none",
         }}
       >
         {stop.order}
@@ -82,16 +82,16 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
         x={18}
         dy="1"
         style={{
-          fontFamily: 'Inter, Arial, sans-serif',
+          fontFamily: "Inter, Arial, sans-serif",
           fontWeight: 700,
           fontSize: 15,
-          fill: 'none',
-          stroke: 'white',
+          fill: "none",
+          stroke: "white",
           strokeWidth: 4,
-          strokeLinejoin: 'round',
-          dominantBaseline: 'middle',
-          pointerEvents: 'none',
-          userSelect: 'none',
+          strokeLinejoin: "round",
+          dominantBaseline: "middle",
+          pointerEvents: "none",
+          userSelect: "none",
         }}
       >
         {stop.name}
@@ -100,13 +100,13 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
         x={18}
         dy="1"
         style={{
-          fontFamily: 'Inter, Arial, sans-serif',
+          fontFamily: "Inter, Arial, sans-serif",
           fontWeight: 700,
           fontSize: 15,
-          fill: '#1d1d1d',
-          dominantBaseline: 'middle',
-          pointerEvents: 'none',
-          userSelect: 'none',
+          fill: "#1d1d1d",
+          dominantBaseline: "middle",
+          pointerEvents: "none",
+          userSelect: "none",
         }}
       >
         {stop.name}

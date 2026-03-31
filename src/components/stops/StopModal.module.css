@@ -119,6 +119,34 @@
   border: none;
 }
 
+.recapBlurb {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.975rem;
+  line-height: 1.65;
+  color: #2a2a2a;
+  background: #f4f1fb;
+  border-left: 4px solid var(--color-purple-deep, #2E1B69);
+  border-radius: 0 8px 8px 0;
+}
+
+.videoLink {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--color-coral, #F05030);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.videoLink:hover {
+  opacity: 0.85;
+}
+
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .dialog {

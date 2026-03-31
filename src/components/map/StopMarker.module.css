@@ -1,11 +1,6 @@
 .marker {
-  cursor: default;
-  outline: none;
-}
-
-.marker[data-status='unlocked'],
-.marker[data-status='active'] {
   cursor: pointer;
+  outline: none;
 }
 
 /* Focus ring for keyboard nav — drawn as SVG outline on the outer circle */

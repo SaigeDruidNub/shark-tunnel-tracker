@@ -20,27 +20,35 @@ export function PhotoSubmissionForm() {
   const [fileError, setFileError] = useState<string | null>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  function validateAndSetFile(selected: File) {
+    if (!ACCEPTED_TYPES.includes(selected.type)) {
+      setFileError("Please select a JPEG, PNG, WebP, or GIF image.");
+      return;
+    }
+    if (selected.size > MAX_FILE_BYTES) {
+      setFileError("Image must be 10 MB or smaller.");
+      return;
+    }
+    setFileError(null);
+    setFile(selected);
+  }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files?.[0] ?? null;
     setFileError(null);
     setFile(null);
+    if (selected) validateAndSetFile(selected);
+  }
 
-    if (!selected) return;
-
-    if (!ACCEPTED_TYPES.includes(selected.type)) {
-      setFileError("Please select a JPEG, PNG, WebP, or GIF image.");
-      e.target.value = "";
-      return;
-    }
-
-    if (selected.size > MAX_FILE_BYTES) {
-      setFileError("Image must be 10 MB or smaller.");
-      e.target.value = "";
-      return;
-    }
-
-    setFile(selected);
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    setIsDragOver(false);
+    const droppedFile = e.dataTransfer.files[0];
+    if (!droppedFile) return;
+    setFile(null);
+    validateAndSetFile(droppedFile);
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -55,7 +63,6 @@ export function PhotoSubmissionForm() {
     const videoUrl = (data.get("videoUrl") as string).trim() || undefined;
     const relatedStopId = (data.get("relatedStopId") as string) || undefined;
 
-    // Must have a photo or a YouTube URL
     if (!file && !videoUrl) {
       setFileError("Please upload a photo or enter a YouTube URL.");
       return;
@@ -136,114 +143,124 @@ export function PhotoSubmissionForm() {
       noValidate
       aria-label="Submit a photo or video"
     >
-      <h3 className={styles.title}>Share a Photo</h3>
+      <h3 className={styles.title}>Submit Your Photo</h3>
       <p className={styles.subtitle}>
-        Snap a pic at a stop and share it with the whole class!
+        Spotted the Shark Tunnel? Snap a photo and share it with the KidWind
+        community!
       </p>
 
-      {/* Photo upload */}
-      <div className={`${styles.field} ${styles.fieldSpan}`}>
-        <label htmlFor={fileInputId} className={styles.label}>
-          Upload a photo
+      {/* Drag-and-drop upload zone */}
+      <div
+        className={`${styles.dropzone}${isDragOver ? ` ${styles.dropzoneActive}` : ""}`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setIsDragOver(true);
+        }}
+        onDragLeave={() => setIsDragOver(false)}
+        onDrop={handleDrop}
+      >
+        <label htmlFor={fileInputId} className={styles.dropzoneLabel}>
+          <span className={styles.uploadIconBox} aria-hidden="true">
+            ↑
+          </span>
+          <span className={styles.dropzoneText}>
+            {file
+              ? `${file.name} (${(file.size / 1024 / 1024).toFixed(1)} MB)`
+              : "Tap to upload or drag a photo here"}
+          </span>
+          <input
+            id={fileInputId}
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            className={styles.hiddenInput}
+            onChange={handleFileChange}
+            disabled={isUploading}
+            aria-describedby={fileError ? `${fileInputId}-error` : undefined}
+          />
         </label>
-        <input
-          id={fileInputId}
-          type="file"
-          accept="image/jpeg,image/png,image/webp,image/gif"
-          className={styles.fileInput}
-          onChange={handleFileChange}
-          disabled={isUploading}
-          aria-describedby={fileError ? `${fileInputId}-error` : undefined}
-        />
-        {file && (
-          <p className={styles.fileName} aria-live="polite">
-            {file.name} ({(file.size / 1024 / 1024).toFixed(1)} MB)
-          </p>
-        )}
-        {fileError && (
-          <p
-            id={`${fileInputId}-error`}
-            className={styles.fieldError}
-            role="alert"
-          >
-            {fileError}
-          </p>
-        )}
-        <p className={styles.hint}>JPEG, PNG, WebP or GIF · max 10 MB</p>
       </div>
 
-      {/* YouTube URL (alternative to file) */}
-      <div className={styles.field}>
-        <label htmlFor={youtubeId} className={styles.label}>
-          Or paste a YouTube link{" "}
-          <span className={styles.optional}>(optional)</span>
-        </label>
-        <input
-          id={youtubeId}
-          name="videoUrl"
-          type="url"
-          className={styles.input}
-          placeholder="https://www.youtube.com/watch?v=..."
-          disabled={isUploading}
-        />
-      </div>
-
-      {/* Caption */}
-      <div className={styles.field}>
-        <label htmlFor={captionId} className={styles.label}>
-          Caption <span aria-hidden="true">*</span>
-        </label>
-        <input
-          id={captionId}
-          name="caption"
-          type="text"
-          required
-          maxLength={200}
-          className={styles.input}
-          placeholder="The shark made it to the Mississippi!"
-          disabled={isUploading}
-        />
-      </div>
-
-      {/* Name */}
-      <div className={styles.field}>
-        <label htmlFor={nameId} className={styles.label}>
-          Your name <span aria-hidden="true">*</span>
-        </label>
-        <input
-          id={nameId}
-          name="submitterName"
-          type="text"
-          required
-          maxLength={100}
-          className={styles.input}
-          placeholder="Alex K."
-          disabled={isUploading}
-        />
-      </div>
-
-      {/* Related stop (optional) */}
-      <div className={styles.field}>
-        <label htmlFor={stopId} className={styles.label}>
-          Which stop? <span className={styles.optional}>(optional)</span>
-        </label>
-        <select
-          id={stopId}
-          name="relatedStopId"
-          className={styles.select}
-          disabled={isUploading}
+      {fileError && (
+        <p
+          id={`${fileInputId}-error`}
+          className={styles.fieldError}
+          role="alert"
         >
-          <option value="">— pick a stop —</option>
-          {stops.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.name}, {s.state}
-            </option>
-          ))}
-        </select>
+          {fileError}
+        </p>
+      )}
+      <p className={styles.hint}>JPEG, PNG, WebP or GIF · max 10 MB</p>
+
+      {/* 2-column field grid */}
+      <div className={styles.fieldsGrid}>
+        <div className={styles.field}>
+          <label htmlFor={captionId} className={styles.label}>
+            Caption <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id={captionId}
+            name="caption"
+            type="text"
+            required
+            maxLength={200}
+            className={styles.input}
+            placeholder="The shark made it!"
+            disabled={isUploading}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={nameId} className={styles.label}>
+            Your name <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id={nameId}
+            name="submitterName"
+            type="text"
+            required
+            maxLength={100}
+            className={styles.input}
+            placeholder="Alex K."
+            disabled={isUploading}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={youtubeId} className={styles.label}>
+            YouTube link <span className={styles.optional}>(optional)</span>
+          </label>
+          <input
+            id={youtubeId}
+            name="videoUrl"
+            type="url"
+            className={styles.input}
+            placeholder="https://youtube.com/..."
+            disabled={isUploading}
+          />
+        </div>
+
+        <div className={styles.field}>
+          <label htmlFor={stopId} className={styles.label}>
+            Which stop? <span className={styles.optional}>(optional)</span>
+          </label>
+          <select
+            id={stopId}
+            name="relatedStopId"
+            className={styles.select}
+            disabled={isUploading}
+          >
+            <option value="">— pick a stop —</option>
+            {stops.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.name}, {s.state}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {errorMessage && (
-        <p className={`${styles.formError} ${styles.fieldSpan}`} role="alert">
+        <p className={styles.formError} role="alert">
           {errorMessage}
         </p>
       )}
@@ -254,10 +271,10 @@ export function PhotoSubmissionForm() {
         disabled={isUploading}
         aria-disabled={isUploading}
       >
-        {isUploading ? "Uploading…" : "Submit"}
+        {isUploading ? "Uploading…" : "Submit Photo"}
       </button>
 
-      <p className={`${styles.required} ${styles.fieldSpan}`}>* required</p>
+      <p className={styles.required}>* required</p>
     </form>
   );
 }

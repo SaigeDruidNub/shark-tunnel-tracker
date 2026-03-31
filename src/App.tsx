@@ -4,17 +4,12 @@ import { Layout } from "./components/layout/Layout";
 import { RouteMap } from "./components/map/RouteMap";
 import { FeedPanel } from "./components/feed/FeedPanel";
 import { StopModal } from "./components/stops/StopModal";
+import { InfoPanel } from "./components/info/InfoPanel";
 import { AppProvider, useAppContext } from "./context/AppContext";
 
-const PhotoSubmissionForm = lazy(() =>
-  import("./components/photos/PhotoSubmissionForm").then((m) => ({
-    default: m.PhotoSubmissionForm,
-  })),
-);
-
-const PhotoGallery = lazy(() =>
-  import("./components/photos/PhotoGallery").then((m) => ({
-    default: m.PhotoGallery,
+const GalleryPage = lazy(() =>
+  import("./components/photos/GalleryPage").then((m) => ({
+    default: m.GalleryPage,
   })),
 );
 
@@ -36,38 +31,20 @@ function AppInner() {
               />
             </div>
             <div style={{ flex: "0 0 auto" }}>
-              <Suspense fallback={null}>
-                <PhotoSubmissionForm />
-              </Suspense>
+              <InfoPanel
+                onViewGallery={() => dispatch({ type: "OPEN_GALLERY" })}
+              />
             </div>
           </>
         }
-        feed={
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              height: "100%",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                borderRight: "1px solid var(--color-border)",
-                overflowY: "auto",
-                height: "100%",
-              }}
-            >
-              <FeedPanel />
-            </div>
-            <div style={{ overflowY: "auto", height: "100%" }}>
-              <Suspense fallback={null}>
-                <PhotoGallery />
-              </Suspense>
-            </div>
-          </div>
-        }
+        feed={<FeedPanel />}
       />
+      <StopModal />
+      {state.showGallery && (
+        <Suspense fallback={null}>
+          <GalleryPage onClose={() => dispatch({ type: "CLOSE_GALLERY" })} />
+        </Suspense>
+      )}
       <StopModal />
     </>
   );

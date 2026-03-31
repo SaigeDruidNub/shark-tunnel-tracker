@@ -46,6 +46,6 @@
     min-width: var(--map-panel-min-width);
     border-top: none;
     border-left: 2px solid var(--color-border);
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 }

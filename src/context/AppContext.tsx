@@ -5,13 +5,19 @@ import { createContext, useContext, useReducer } from "react";
 interface AppState {
   /** The stop currently open in the modal, or null when closed. */
   selectedStopId: string | null;
+  /** Whether the full community gallery overlay is visible. */
+  showGallery: boolean;
 }
 
-const initialState: AppState = { selectedStopId: null };
+const initialState: AppState = { selectedStopId: null, showGallery: false };
 
 // ── Actions ──────────────────────────────────────────────────────────────────
 
-type AppAction = { type: "OPEN_STOP"; stopId: string } | { type: "CLOSE_STOP" };
+type AppAction =
+  | { type: "OPEN_STOP"; stopId: string }
+  | { type: "CLOSE_STOP" }
+  | { type: "OPEN_GALLERY" }
+  | { type: "CLOSE_GALLERY" };
 
 function appReducer(state: AppState, action: AppAction): AppState {
   switch (action.type) {
@@ -19,6 +25,10 @@ function appReducer(state: AppState, action: AppAction): AppState {
       return { ...state, selectedStopId: action.stopId };
     case "CLOSE_STOP":
       return { ...state, selectedStopId: null };
+    case "OPEN_GALLERY":
+      return { ...state, showGallery: true };
+    case "CLOSE_GALLERY":
+      return { ...state, showGallery: false };
     default:
       return state;
   }

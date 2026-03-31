@@ -1,0 +1,24 @@
+{
+  "name": "shark-tunnel-studio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@sanity/vision": "^3.66.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sanity": "^3.66.2",
+    "styled-components": "^6.1.13"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "~5.9.3",
+    "vite": "^6.3.5"
+  }
+}

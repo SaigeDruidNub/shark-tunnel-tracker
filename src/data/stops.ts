@@ -3,10 +3,11 @@ import type { Stop } from '../types/stop';
 /**
  * The 8 stops along the shark tunnel's journey from Mineral Point, WI to Salina, KS.
  *
- * SVG coordinates match the illustrated map viewBox (1400 × 1044).
+ * SVG coordinates match mapBackground.png (1152 × 922).
  * Route flows right-to-left / top-to-bottom: WI upper-right → KS lower-left.
  *
- * To update a stop: edit name, description, videoUrl, or svgX/svgY here and redeploy.
+ * To fine-tune marker positions: open mapBackground.png in an image editor,
+ * hover over each stop circle to read pixel coordinates, then update svgX/svgY.
  */
 export const stops: Stop[] = [
   {
@@ -17,8 +18,8 @@ export const stops: Stop[] = [
     state: 'WI',
     description:
       'Home base! The shark tunnel starts its adventure right here in Mineral Point, Wisconsin — the birthplace of this wind-powered journey to Kansas.',
-    svgX: 1090,
-    svgY: 248,
+    svgX: 905,
+    svgY: 243,
   },
   {
     id: 'dubuque',
@@ -28,8 +29,8 @@ export const stops: Stop[] = [
     state: 'IA',
     description:
       'The tunnel crosses the mighty Mississippi River into Iowa at Dubuque! Keep an eye out for barges and river bluffs along the way.',
-    svgX: 1018,
-    svgY: 346,
+    svgX: 875,
+    svgY: 285,
   },
   {
     id: 'cedar-rapids',
@@ -39,8 +40,8 @@ export const stops: Stop[] = [
     state: 'IA',
     description:
       'Cedar Rapids is the second-largest city in Iowa and home to the National Czech & Slovak Museum. The Quaker Oats factory here makes it smell like breakfast!',
-    svgX: 950,
-    svgY: 414,
+    svgX: 783,
+    svgY: 345,
   },
   {
     id: 'des-moines',
@@ -50,8 +51,8 @@ export const stops: Stop[] = [
     state: 'IA',
     description:
       'The capital of Iowa! Des Moines has a beautiful gold-domed capitol building. Students here are big fans of clean energy and wind power.',
-    svgX: 748,
-    svgY: 465,
+    svgX: 630,
+    svgY: 387,
   },
   {
     id: 'kansas-city',
@@ -61,8 +62,8 @@ export const stops: Stop[] = [
     state: 'MO',
     description:
       'The big city! Kansas City straddles the Missouri-Kansas border. Home of great barbecue and the final state line crossing before Salina.',
-    svgX: 708,
-    svgY: 633,
+    svgX: 545,
+    svgY: 658,
   },
   {
     id: 'topeka',
@@ -72,8 +73,8 @@ export const stops: Stop[] = [
     state: 'KS',
     description:
       'The capital of Kansas! Topeka\'s state capitol dome is a landmark visible for miles across the prairie. Wind power is a huge deal in Kansas!',
-    svgX: 662,
-    svgY: 725,
+    svgX: 440,
+    svgY: 680,
   },
   {
     id: 'manhattan',
@@ -83,8 +84,8 @@ export const stops: Stop[] = [
     state: 'KS',
     description:
       'Almost there! Manhattan, KS (the "Little Apple") is home to Kansas State University. The Flint Hills nearby are one of the last tallgrass prairies on Earth.',
-    svgX: 564,
-    svgY: 812,
+    svgX: 378,
+    svgY: 635,
   },
   {
     id: 'salina',
@@ -94,7 +95,7 @@ export const stops: Stop[] = [
     state: 'KS',
     description:
       'The finish line! The shark tunnel has arrived in Salina, Kansas for the Kansas KidWind State Challenge. Time to see what students have built!',
-    svgX: 456,
-    svgY: 838,
+    svgX: 290,
+    svgY: 680,
   },
 ];

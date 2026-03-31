@@ -7,7 +7,7 @@
 :root {
   /* KidWind brand purples */
   --color-purple-deep:    #2E1B69; /* headings, body text on light bg */
-  --color-purple-brand:   #4527A0; /* primary brand purple, section fills */
+  --color-purple-brand:   #4d40b2; /* primary brand purple, section fills */
   --color-purple-light:   #6B4AC9; /* hover states, secondary elements */
   --color-purple-wash:    #EDE8FC; /* tinted backgrounds, card borders */
 
@@ -43,7 +43,7 @@
 
   /* ── Typography ─────────────────────────────────────────── */
   --font-sans: "Nunito", "Fredoka One", "Rounded Mplus 1c", ui-rounded, system-ui, sans-serif;
-  --font-display: "Fredoka One", "Nunito", ui-rounded, system-ui, sans-serif;
+  --font-display: "Baloo 2", "Fredoka One", "Nunito", ui-rounded, system-ui, sans-serif;
 
   --text-xs:   0.75rem;   /* 12px */
   --text-sm:   0.875rem;  /* 14px */
@@ -98,7 +98,7 @@
   --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Layout ──────────────────────────────────────────────── */
-  --max-width-content: 1600px;
+  --max-width-content: 100%;
   --map-panel-min-width: 320px;
   --feed-panel-width: 360px;
   --header-height: 64px;

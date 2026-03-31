@@ -5,6 +5,7 @@
   max-width: var(--max-width-content);
   margin-inline: auto;
   width: 100%;
+  padding-inline: var(--space-4);
 }
 
 .mapPanel {
@@ -34,10 +35,11 @@
     flex-direction: row;
     height: calc(100dvh - var(--header-height));
     overflow: hidden;
+    padding-inline: var(--space-6);
   }
 
   .mapPanel {
-    overflow: hidden;
+    overflow-y: auto;
   }
 
   .feedPanel {
@@ -45,7 +47,7 @@
     width: var(--feed-panel-width);
     min-width: var(--map-panel-min-width);
     border-top: none;
-    border-left: 2px solid var(--color-border);
+    border-left: 2px solid #d946b8;
     overflow-y: auto;
   }
 }

@@ -10,12 +10,17 @@ export function Header() {
 
       <div className={styles.inner}>
         <div className={styles.brand}>
-          {/* KidWind logo style: "Kid" bold purple, "Wind" brand purple */}
-          <span className={styles.logoKid}>Kid</span>
-          <span className={styles.logoWind}>Wind</span>
-          <span className={styles.logoSeparator} aria-hidden="true"> · </span>
-          <span className={styles.appName}>{siteContent.title}</span>
+          <span className={styles.titleLine1}>Shark Tunnel</span>
+          <span className={styles.titleLine2}>Tracker</span>
         </div>
+        <a
+          href="https://kidwind.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.kidwindLink}
+        >
+          KidWind.org
+        </a>
       </div>
 
       {siteContent.bannerMessage && (

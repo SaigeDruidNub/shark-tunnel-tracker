@@ -37,7 +37,7 @@
   }
 
   .mapPanel {
-    overflow-y: auto;
+    overflow: hidden;
   }
 
   .feedPanel {

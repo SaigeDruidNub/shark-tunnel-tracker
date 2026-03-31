@@ -22,7 +22,7 @@ function AppInner() {
       <Layout
         map={
           <>
-            <div style={{ width: "100%", height: "100%", minHeight: "640px" }}>
+            <div style={{ width: "100%", height: "100%", minHeight: "300px" }}>
               <RouteMap
                 selectedStopId={state.selectedStopId}
                 onStopClick={(stopId) =>

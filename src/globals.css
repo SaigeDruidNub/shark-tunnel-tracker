@@ -98,9 +98,9 @@
   --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
 
   /* ── Layout ──────────────────────────────────────────────── */
-  --max-width-content: 1280px;
+  --max-width-content: 1600px;
   --map-panel-min-width: 320px;
-  --feed-panel-width: 360px;
+  --feed-panel-width: 680px;
   --header-height: 64px;
 }
 

@@ -11,13 +11,10 @@ export function FeedPanel() {
   return (
     <section className={styles.panel} aria-label="Journey updates feed">
       <header className={styles.header}>
-        <h2 className={styles.heading}>📰 Journey Updates</h2>
-        <span
-          className={styles.count}
-          aria-label={`${feedItems.length} update${feedItems.length !== 1 ? 's' : ''}`}
-        >
-          {feedItems.length}
-        </span>
+        <div className={styles.headingRow}>
+          <span className={styles.actionLabel}>Action Feed</span>
+        </div>
+        <p className={styles.subheading}>What&rsquo;s Happening 🦈</p>
       </header>
 
       {feedItems.length === 0 ? (

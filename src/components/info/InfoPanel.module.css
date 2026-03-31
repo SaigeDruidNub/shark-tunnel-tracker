@@ -1,8 +1,11 @@
 .section {
   flex: 0 0 auto;
-  background: var(--color-gray-100);
-  border-top: 2px solid var(--color-border);
-  padding: var(--space-2) var(--space-4) var(--space-3);
+  background: var(--color-white);
+  border: 1.5px solid #2a7a4f;
+  border-radius: var(--radius-lg);
+  margin: var(--space-4) var(--space-4) var(--space-6);
+  overflow: hidden;
+  padding: var(--space-3) var(--space-4);
 }
 
 .sectionHead {
@@ -33,11 +36,23 @@
   clip-path: polygon(0 0, 100% 0, calc(100% - 12px) 100%, 0 100%);
 }
 
-/* ── 3-column card grid ─────────────────────────────────── */
+/* ── Card grid — stacked column, side-by-side on wide screens ── */
 .cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-3);
+}
+
+@media (min-width: 1100px) {
+  .cards {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .card {
+    flex: 1 1 0;
+    min-width: 0;
+  }
 }
 
 .card {
@@ -54,14 +69,13 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-3);
-  height: 100%;
 }
 
 .cardTitle {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-purple-deep);
+  color: var(--color-purple-brand);
   margin: 0;
   text-align: center;
 }
@@ -152,8 +166,7 @@
   gap: var(--space-3);
   justify-content: center;
   flex-wrap: wrap;
-  margin-top: auto;
-  padding-top: var(--space-2);
+  margin-top: var(--space-3);
 }
 
 /* ── Shared buttons ─────────────────────────────────────── */
@@ -198,7 +211,8 @@
 }
 
 .coralBtn:hover {
-  background: var(--color-coral-hover);
+  background: var(--color-purple-brand);
+  color: var(--color-white);
 }
 
 .coralBtn:focus-visible {

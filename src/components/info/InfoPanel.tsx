@@ -86,7 +86,7 @@ function AboutCard() {
           Learn More
         </a>
         <a
-          href="https://www.kidwind.org/support"
+          href="https://kidwind.org/sponsors/"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.coralBtn}

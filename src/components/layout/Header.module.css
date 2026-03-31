@@ -10,6 +10,7 @@
 .inner {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: var(--header-height);
   max-width: var(--max-width-content);
   margin-inline: auto;
@@ -22,48 +23,47 @@
   }
 }
 
+.kidwindLink {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-purple-brand);
+  text-decoration: none;
+  border: 2px solid var(--color-purple-brand);
+  border-radius: var(--radius-full);
+  padding: var(--space-1) var(--space-4);
+  transition: background var(--duration-fast), color var(--duration-fast);
+  white-space: nowrap;
+}
+
+.kidwindLink:hover {
+  background: var(--color-purple-brand);
+  color: var(--color-white);
+}
+
 .brand {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  line-height: 1.1;
   gap: 0;
-  line-height: 1;
 }
 
-.logoKid {
-  font-family: var(--font-display);
-  font-size: var(--text-2xl);
-  font-weight: var(--font-weight-extrabold);
-  color: var(--color-purple-deep);
-  letter-spacing: -0.02em;
-}
-
-.logoWind {
+.titleLine1 {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
   font-weight: var(--font-weight-extrabold);
   color: var(--color-purple-brand);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
-.logoSeparator {
-  color: var(--color-gray-300);
-  font-size: var(--text-lg);
-  margin-inline: var(--space-2);
-}
-
-.appName {
+.titleLine2 {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--color-purple-deep);
-  white-space: nowrap;
-}
-
-@media (max-width: 480px) {
-  .logoSeparator,
-  .appName {
-    display: none;
-  }
+  color: var(--color-coral);
+  letter-spacing: -0.01em;
+  line-height: 1;
 }
 
 /* Live banner below the header bar */

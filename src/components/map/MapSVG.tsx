@@ -29,11 +29,11 @@ const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
 
   return (
     <svg
-      viewBox="0 0 1152 922"
+      viewBox="0 184 1152 554"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Illustrated Shark Tunnel Tracker route map from Mineral Point to Salina, Kansas"
-      style={{ width: '100%', height: '100%', display: 'block' }}
+      style={{ width: '100%', height: 'auto', display: 'block' }}
     >
       {/* PNG map background — rendered first so route and markers sit on top */}
       <image

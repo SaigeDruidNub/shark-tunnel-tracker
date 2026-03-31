@@ -75,7 +75,7 @@ function SubmissionCard({ item }: { item: PhotoSubmission }) {
 }
 
 export function PhotoGallery() {
-  const { data, isPending, isError } = usePhotoSubmissions()
+  const { data, isPending, isError, error } = usePhotoSubmissions()
 
   if (isPending) {
     return (
@@ -91,6 +91,9 @@ export function PhotoGallery() {
   }
 
   if (isError) {
+    if (import.meta.env.DEV) {
+      console.error('[PhotoGallery] fetch failed:', error)
+    }
     return (
       <section className={styles.section} aria-label="Community photos">
         <h3 className={styles.heading}>Community Photos</h3>

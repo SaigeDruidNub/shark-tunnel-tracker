@@ -12,9 +12,9 @@
   --color-purple-wash:    #EDE8FC; /* tinted backgrounds, card borders */
 
   /* Coral / CTA */
-  --color-coral:          #F05030; /* primary CTA buttons */
-  --color-coral-hover:    #D43F20; /* button hover */
-  --color-coral-light:    #FDE8E4; /* coral tint for tags/badges */
+  --color-coral:          #e04e4e; /* primary CTA buttons */
+  --color-coral-hover:    #c43535; /* button hover */
+  --color-coral-light:    #fce8e8; /* coral tint for tags/badges */
 
   /* Teal / accent */
   --color-teal:           #00C8B4; /* accent banners, highlights */

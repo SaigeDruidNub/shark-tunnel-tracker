@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityImageSource } from "@sanity/image-url";
 import { readClient } from "../lib/sanity/client";
 import { FEED_POSTS_QUERY, type SanityFeedPost } from "../lib/sanity/queries";
 import { sanityImageUrl } from "../lib/sanity/imageUrl";

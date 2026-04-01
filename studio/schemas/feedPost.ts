@@ -46,10 +46,21 @@ export const feedPost = defineType({
     }),
     defineField({
       name: "relatedStopId",
-      title: "Related Stop ID",
+      title: "Related Stop",
       type: "string",
-      description:
-        "Optional: the stop ID this update is tied to (e.g. 'salina').",
+      description: "Optional: the stop this update is tied to.",
+      options: {
+        list: [
+          { title: "Mineral Point, WI", value: "mineral-point" },
+          { title: "Dubuque, IA", value: "dubuque" },
+          { title: "Cedar Rapids, IA", value: "cedar-rapids" },
+          { title: "Des Moines, IA", value: "des-moines" },
+          { title: "Kansas City, MO", value: "kansas-city" },
+          { title: "Topeka, KS", value: "topeka" },
+          { title: "Manhattan, KS", value: "manhattan" },
+          { title: "Salina, KS", value: "salina" },
+        ],
+      },
     }),
   ],
   preview: {

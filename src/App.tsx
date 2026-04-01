@@ -25,15 +25,12 @@ function AppInner() {
           <>
             <div
               style={{
-                margin: "12px var(--space-4) 0",
+                margin: "var(--space-4) 0 0",
                 borderRadius: "12px",
                 background: "#ffffff",
                 display: "flex",
                 flexDirection: "column",
-                paddingLeft: "12px",
-                paddingRight: "12px",
-                paddingTop: "12px",
-                paddingBottom: "20px",
+                padding: "var(--space-3)",
               }}
             >
               <h2

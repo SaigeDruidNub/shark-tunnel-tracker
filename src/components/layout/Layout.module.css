@@ -41,6 +41,7 @@
     height: calc(100dvh - var(--header-height));
     overflow: hidden;
     padding-inline: var(--space-6);
+    gap: var(--space-4);
   }
 
   .mapPanel {

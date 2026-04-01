@@ -1,4 +1,4 @@
-import { feedItems } from "../../data/feedItems";
+import { useFeedPosts } from "../../hooks/useFeedPosts";
 import { useAppContext } from "../../context/AppContext";
 import { FeedCard } from "./FeedCard";
 import styles from "./FeedPanel.module.css";
@@ -11,8 +11,9 @@ import styles from "./FeedPanel.module.css";
 export function FeedPanel() {
   const { state } = useAppContext();
   const now = state.debugNow ?? new Date();
+  const allPosts = useFeedPosts();
 
-  const visibleItems = feedItems.filter(
+  const visibleItems = allPosts.filter(
     (item) => item.publishedAt.getTime() <= now.getTime(),
   );
 

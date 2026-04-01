@@ -50,3 +50,28 @@ export interface TruckStatus {
   message: string;
   showBubble: boolean;
 }
+
+/**
+ * Fetches all feed posts from Sanity, newest first.
+ */
+export const FEED_POSTS_QUERY = `
+  *[_type == "feedPost"] | order(publishedAt desc) {
+    _id,
+    title,
+    body,
+    image,
+    videoUrl,
+    publishedAt,
+    relatedStopId
+  }
+` as const;
+
+export interface SanityFeedPost {
+  _id: string;
+  title: string;
+  body: string;
+  image?: unknown;
+  videoUrl?: string;
+  publishedAt: string;
+  relatedStopId?: string;
+}

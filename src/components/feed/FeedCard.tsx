@@ -1,23 +1,34 @@
-import type { FeedItem } from '../../types/feedItem';
-import styles from './FeedCard.module.css';
+import type { FeedItem } from "../../types/feedItem";
+import styles from "./FeedCard.module.css";
 
 interface FeedCardProps {
   item: FeedItem;
 }
 
 function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat('en-US', {
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: '2-digit',
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
   }).format(date);
 }
 
 export function FeedCard({ item }: FeedCardProps) {
   return (
     <article className={styles.card}>
-      {item.imageUrl && (
+      {item.videoUrl && (
+        <div className={styles.videoWrapper}>
+          <iframe
+            src={item.videoUrl}
+            title={item.title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+          />
+        </div>
+      )}
+      {!item.videoUrl && item.imageUrl && (
         <img
           src={item.imageUrl}
           alt=""

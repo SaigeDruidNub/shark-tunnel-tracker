@@ -19,6 +19,22 @@
   display: block;
 }
 
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 .content {
   padding: var(--space-4);
   display: flex;

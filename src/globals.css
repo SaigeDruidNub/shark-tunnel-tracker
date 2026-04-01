@@ -42,8 +42,8 @@
   --color-focus-ring:     var(--color-teal);
 
   /* ── Typography ─────────────────────────────────────────── */
-  --font-sans: "Nunito", "Fredoka One", "Rounded Mplus 1c", ui-rounded, system-ui, sans-serif;
-  --font-display: "Baloo 2", "Fredoka One", "Nunito", ui-rounded, system-ui, sans-serif;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-display: "Montserrat", system-ui, sans-serif;
 
   --text-xs:   0.75rem;   /* 12px */
   --text-sm:   0.875rem;  /* 14px */

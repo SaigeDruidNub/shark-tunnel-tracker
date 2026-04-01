@@ -23,7 +23,7 @@
 
   /* Neutrals */
   --color-white:          #FFFFFF;
-  --color-off-white:      #F8F7FF; /* page background — warm purple tint */
+  --color-off-white:      #d9f5f0; /* page background — KidWind light teal */
   --color-gray-100:       #F0EEF8;
   --color-gray-300:       #C4BEDF;
   --color-gray-500:       #7B72A8;
@@ -100,8 +100,8 @@
   /* ── Layout ──────────────────────────────────────────────── */
   --max-width-content: 100%;
   --map-panel-min-width: 320px;
-  --feed-panel-width: 360px;
-  --header-height: 64px;
+  --feed-panel-width: 300px;
+  --header-height: 80px;
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
@@ -329,6 +329,13 @@ button {
   .container {
     padding-inline: var(--space-8);
   }
+}
+
+/* ── Utility ─────────────────────────────────────────────── */
+.tilt-me {
+  transform: rotate(-2deg);
+  transform-origin: left center;
+  display: inline-block;
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */

@@ -34,3 +34,19 @@ export interface StopRecap {
   blurb?: string;
   videoUrl?: string;
 }
+
+/**
+ * Fetches the most recently updated truck status document.
+ * Only one such document should exist in the dataset.
+ */
+export const TRUCK_STATUS_QUERY = `
+  *[_type == "truckStatus"] | order(_updatedAt desc) [0] {
+    message,
+    showBubble
+  }
+` as const;
+
+export interface TruckStatus {
+  message: string;
+  showBubble: boolean;
+}

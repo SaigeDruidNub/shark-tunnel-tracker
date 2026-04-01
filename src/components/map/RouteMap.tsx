@@ -1,11 +1,12 @@
-import { useRef, useLayoutEffect, useState } from 'react';
-import { stops } from '../../data/stops';
-import { useTruckPosition } from '../../hooks/useTruckPosition';
-import { useAppContext } from '../../context/AppContext';
-import { MapSVG } from './MapSVG';
-import { StopMarker } from './StopMarker';
-import { TruckMarker } from './TruckMarker';
-import type { StopStatus } from '../../types/stop';
+import { useRef, useLayoutEffect, useState } from "react";
+import { stops } from "../../data/stops";
+import { useTruckPosition } from "../../hooks/useTruckPosition";
+import { useTruckStatus } from "../../hooks/useTruckStatus";
+import { useAppContext } from "../../context/AppContext";
+import { MapSVG } from "./MapSVG";
+import { StopMarker } from "./StopMarker";
+import { TruckMarker } from "./TruckMarker";
+import type { StopStatus } from "../../types/stop";
 
 /**
  * Fractional positions [0..1] along the route path at each of the 8 stops.
@@ -25,14 +26,14 @@ import type { StopStatus } from '../../types/stop';
  * Cumulative fractions at each stop (stops[0..7]):
  */
 const STOP_PATH_FRACTIONS: readonly number[] = [
-  0,      // mineral-point  (0)
-  0.058,  // dubuque        ( 51.6 / 886.8)
-  0.182,  // cedar-rapids   (161.4 / 886.8)
-  0.361,  // des-moines     (320.1 / 886.8)
-  0.681,  // kansas-city    (604.1 / 886.8)
-  0.802,  // topeka         (711.4 / 886.8)
-  0.889,  // manhattan      (788.0 / 886.8)
-  1.0,    // salina
+  0, // mineral-point  (0)
+  0.058, // dubuque        ( 51.6 / 886.8)
+  0.182, // cedar-rapids   (161.4 / 886.8)
+  0.361, // des-moines     (320.1 / 886.8)
+  0.681, // kansas-city    (604.1 / 886.8)
+  0.802, // topeka         (711.4 / 886.8)
+  0.889, // manhattan      (788.0 / 886.8)
+  1.0, // salina
 ];
 
 interface RouteMapProps {
@@ -63,7 +64,16 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
   }, []);
 
   const { state } = useAppContext();
-  const { legIndex, t, isMoving } = useTruckPosition(state.debugNow ?? undefined);
+  const { legIndex, t, isMoving } = useTruckPosition(
+    state.debugNow ?? undefined,
+  );
+  const truckStatus = useTruckStatus();
+  // showBubble may be undefined if the field was never explicitly toggled in the
+  // studio — treat undefined/null as "show" so the default is always visible.
+  const thoughtBubble =
+    truckStatus?.showBubble !== false && truckStatus?.message
+      ? truckStatus.message
+      : null;
 
   // Map (legIndex, t) → SVG (x, y) via the ghost path element
   const truckPoint = (() => {
@@ -71,23 +81,37 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
       return { x: stops[0].svgX, y: stops[0].svgY };
     }
     const fromFrac = STOP_PATH_FRACTIONS[legIndex] ?? 0;
-    const toFrac = STOP_PATH_FRACTIONS[Math.min(legIndex + 1, STOP_PATH_FRACTIONS.length - 1)];
+    const toFrac =
+      STOP_PATH_FRACTIONS[
+        Math.min(legIndex + 1, STOP_PATH_FRACTIONS.length - 1)
+      ];
     const frac = fromFrac + (toFrac - fromFrac) * t;
     const pt = pathRef.current.getPointAtLength(frac * totalLength);
     return { x: pt.x, y: pt.y };
   })();
 
+  const travelledLength = (() => {
+    if (totalLength === 0) return 0;
+    const fromFrac = STOP_PATH_FRACTIONS[legIndex] ?? 0;
+    const toFrac =
+      STOP_PATH_FRACTIONS[
+        Math.min(legIndex + 1, STOP_PATH_FRACTIONS.length - 1)
+      ];
+    const frac = fromFrac + (toFrac - fromFrac) * t;
+    return frac * totalLength;
+  })();
+
   function getStopStatus(stopOrder: number, stopId: string): StopStatus {
-    if (stopId === selectedStopId) return 'active';
+    if (stopId === selectedStopId) return "active";
     // When t === 1 the truck has arrived at the destination stop of legIndex,
     // so treat it as having completed one extra leg for unlock purposes.
     const effectiveLeg = legIndex + (t >= 1 ? 1 : 0);
-    if (stopOrder - 1 <= effectiveLeg) return 'unlocked';
-    return 'locked';
+    if (stopOrder - 1 <= effectiveLeg) return "unlocked";
+    return "locked";
   }
 
   return (
-    <MapSVG ref={pathRef}>
+    <MapSVG ref={pathRef} travelledLength={travelledLength}>
       {/* Stop markers render first so the truck always paints on top */}
       {stops.map((stop) => (
         <StopMarker
@@ -97,7 +121,12 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
           onClick={() => onStopClick(stop.id)}
         />
       ))}
-      <TruckMarker x={truckPoint.x} y={truckPoint.y} isMoving={isMoving} />
+      <TruckMarker
+        x={truckPoint.x}
+        y={truckPoint.y}
+        isMoving={isMoving}
+        thoughtBubble={thoughtBubble}
+      />
     </MapSVG>
   );
 }

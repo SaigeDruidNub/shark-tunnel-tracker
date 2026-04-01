@@ -1,9 +1,11 @@
-import { forwardRef } from 'react';
-import mapBackground from '../../assets/mapBackground.png';
+import { forwardRef } from "react";
+import mapBackground from "../../assets/mapBackground.png";
 
 interface MapSVGProps {
   /** Stop markers and truck marker rendered by RouteMap */
   children?: React.ReactNode;
+  /** How many SVG units of the path have been travelled — draws a solid overlay */
+  travelledLength?: number;
 }
 
 /**
@@ -19,21 +21,21 @@ interface MapSVGProps {
  *        → Topeka → Manhattan → Salina, KS
  */
 const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
-  { children },
+  { children, travelledLength = 0 },
   routePathRef,
 ) {
   // Coordinates mirror svgX/svgY in src/data/stops.ts.
   // Update both together whenever stop positions change.
   const routeD =
-    'M905 243 L875 285 L783 345 L630 387 L545 658 L440 680 L378 635 L290 680';
+    "M905 243 L875 285 L783 345 L630 387 L545 658 L440 680 L378 635 L290 680";
 
   return (
     <svg
-      viewBox="0 184 1152 554"
+      viewBox="0 20 1152 718"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
       aria-label="Illustrated Shark Tunnel Tracker route map from Mineral Point to Salina, Kansas"
-      style={{ width: '100%', height: 'auto', display: 'block' }}
+      style={{ width: "100%", height: "auto", display: "block" }}
     >
       {/* PNG map background — rendered first so route and markers sit on top */}
       <image
@@ -47,21 +49,29 @@ const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
 
       <defs>
         <linearGradient id="routeFill" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#3c8fd2" />
-          <stop offset="100%" stopColor="#2e73b7" />
+          <stop offset="0%" stopColor="#6B4AC9" />
+          <stop offset="100%" stopColor="#4d40b2" />
         </linearGradient>
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="2" stdDeviation="2" floodColor="#25342e" floodOpacity="0.12" />
+          <feDropShadow
+            dx="0"
+            dy="2"
+            stdDeviation="2"
+            floodColor="#25342e"
+            floodOpacity="0.12"
+          />
         </filter>
       </defs>
 
       <g id="route" filter="url(#softShadow)">
+        {/* Dashed outline for untravelled path */}
         <path
           d={routeD}
-          stroke="#17304a"
+          stroke="#2E1B69"
           strokeWidth="17"
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeDasharray="1 28"
           fill="none"
         />
         <path
@@ -70,8 +80,32 @@ const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
           strokeWidth="11"
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeDasharray="1 28"
           fill="none"
         />
+        {/* Solid overlay for travelled portion */}
+        {travelledLength > 0 && (
+          <>
+            <path
+              d={routeD}
+              stroke="#2E1B69"
+              strokeWidth="17"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray={`${travelledLength} 99999`}
+              fill="none"
+            />
+            <path
+              d={routeD}
+              stroke="url(#routeFill)"
+              strokeWidth="11"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray={`${travelledLength} 99999`}
+              fill="none"
+            />
+          </>
+        )}
         {/* Ghost path — ref target for getPointAtLength() */}
         <path
           ref={routePathRef}

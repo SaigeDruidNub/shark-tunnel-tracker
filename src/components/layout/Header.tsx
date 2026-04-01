@@ -4,10 +4,7 @@ import styles from './Header.module.css';
 export function Header() {
   return (
     <header className={styles.header} role="banner">
-      <a href="#main-content" className="skip-nav">
-        Skip to main content
-      </a>
-
+      
       <div className={styles.inner}>
         <div className={styles.brand}>
           <span className={styles.titleLine1}>Shark Tunnel</span>

@@ -1,7 +1,7 @@
-import { feedItems } from '../../data/feedItems';
-import { useAppContext } from '../../context/AppContext';
-import { FeedCard } from './FeedCard';
-import styles from './FeedPanel.module.css';
+import { feedItems } from "../../data/feedItems";
+import { useAppContext } from "../../context/AppContext";
+import { FeedCard } from "./FeedCard";
+import styles from "./FeedPanel.module.css";
 
 /**
  * Scrollable aside panel listing journey updates from feedItems.ts.
@@ -19,10 +19,7 @@ export function FeedPanel() {
   return (
     <section className={styles.panel} aria-label="Journey updates feed">
       <header className={styles.header}>
-        <div className={styles.headingRow}>
-          <span className={styles.actionLabel}>Action Feed</span>
-        </div>
-        <p className={styles.subheading}>What&rsquo;s Happening 🦈</p>
+        <p className={`${styles.subheading} tilt-me`}>What&rsquo;s Happening</p>
       </header>
 
       {visibleItems.length === 0 ? (

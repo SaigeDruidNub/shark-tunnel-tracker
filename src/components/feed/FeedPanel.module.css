@@ -29,19 +29,16 @@
   text-transform: uppercase;
 }
 
-/* "What's Happening" — teal angled banner, slightly rotated left */
+/* "What's Happening" — teal rectangular banner */
 .subheading {
   display: inline-block;
-  padding: var(--space-2) var(--space-10) var(--space-2) var(--space-5);
+  padding: var(--space-2) var(--space-6) var(--space-2) var(--space-5);
   background: var(--color-teal);
-  color: var(--color-purple-deep);
+  color: var(--color-white);
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--font-weight-extrabold);
   letter-spacing: 0.03em;
-  clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
-  transform: rotate(-2deg) translateX(-4px);
-  transform-origin: left center;
   margin: 0;
 }
 

@@ -12,7 +12,7 @@ const STATUS_COLORS: Record<
   { outer: string; inner: string; text: string }
 > = {
   locked: { outer: "#8e9aaa", inner: "#c7d0db", text: "#555e6a" },
-  unlocked: { outer: "#2f5f95", inner: "#9cd0ef", text: "#111" },
+  unlocked: { outer: "#ff5e5e", inner: "#fce8e8", text: "#7a1010" },
   active: { outer: "#f0b429", inner: "#fff6dc", text: "#5a3a00" },
 };
 
@@ -53,7 +53,13 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
       <circle
         r="15"
         fill={outer}
-        stroke={status === "active" ? "#b07800" : "#0f2236"}
+        stroke={
+          status === "active"
+            ? "#b07800"
+            : status === "unlocked"
+              ? "#c43535"
+              : "#0f2236"
+        }
         strokeWidth="3"
       />
 

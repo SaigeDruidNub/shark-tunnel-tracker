@@ -1,17 +1,23 @@
+import { useState } from "react";
 import { usePhotoSubmissions } from "../../hooks/usePhotoSubmissions";
 import { sanityImageUrl } from "../../lib/sanity/imageUrl";
+import type { PhotoSubmission } from "../../types/photoSubmission";
+import { Lightbox } from "../photos/Lightbox";
 import { PhotoSubmissionForm } from "../photos/PhotoSubmissionForm";
 import styles from "./InfoPanel.module.css";
 
 function toYouTubeThumbnailUrl(watchUrl: string): string | null {
   try {
     const url = new URL(watchUrl);
-    if (!url.hostname.includes("youtube") && !url.hostname.includes("youtu.be")) return null;
+    if (!url.hostname.includes("youtube") && !url.hostname.includes("youtu.be"))
+      return null;
     const videoId =
       url.searchParams.get("v") ??
       url.pathname.split("/").filter(Boolean).pop() ??
       "";
-    return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : null;
+    return videoId
+      ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+      : null;
   } catch {
     return null;
   }
@@ -24,6 +30,9 @@ function CommunityGalleryCard({
 }) {
   const { data, isPending } = usePhotoSubmissions();
   const previews = data?.slice(0, 2) ?? [];
+  const [lightboxItem, setLightboxItem] = useState<PhotoSubmission | null>(
+    null,
+  );
 
   return (
     <div className={styles.cardInner}>
@@ -50,10 +59,17 @@ function CommunityGalleryCard({
                   .fit("crop")
                   .format("webp")
                   .url()
-              : item.videoUrl ? toYouTubeThumbnailUrl(item.videoUrl) : null;
+              : item.videoUrl
+                ? toYouTubeThumbnailUrl(item.videoUrl)
+                : null;
             const isVideo = Boolean(item.videoUrl);
             return (
-              <div key={item._id} className={styles.previewThumb}>
+              <button
+                key={item._id}
+                className={styles.previewThumb}
+                onClick={() => setLightboxItem(item)}
+                aria-label={`Enlarge ${item.caption}`}
+              >
                 {url ? (
                   <>
                     <img
@@ -62,12 +78,14 @@ function CommunityGalleryCard({
                       className={styles.previewImg}
                       loading="lazy"
                     />
-                    {isVideo && <span className={styles.previewVideoOverlay}>▶</span>}
+                    {isVideo && (
+                      <span className={styles.previewVideoOverlay}>▶</span>
+                    )}
                   </>
                 ) : (
                   <div className={styles.previewVideo}>▶</div>
                 )}
-              </div>
+              </button>
             );
           })}
       </div>
@@ -75,6 +93,10 @@ function CommunityGalleryCard({
       <button className={styles.outlineBtn} onClick={onViewGallery}>
         View Full Gallery
       </button>
+
+      {lightboxItem && (
+        <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />
+      )}
     </div>
   );
 }
@@ -124,7 +146,6 @@ export function InfoPanel({ onViewGallery }: InfoPanelProps) {
   return (
     <section className={styles.section}>
       <div className={styles.sectionHead}>
-        <span className={styles.label}>Info &amp; Submissions</span>
         <span className={styles.banner}>Get Involved!</span>
       </div>
 

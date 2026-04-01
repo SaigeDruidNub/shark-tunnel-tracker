@@ -29,7 +29,7 @@ function CommunityGalleryCard({
   onViewGallery: () => void;
 }) {
   const { data, isPending } = usePhotoSubmissions();
-  const previews = data?.slice(0, 2) ?? [];
+  const previews = data?.slice(0, 6) ?? [];
   const [lightboxItem, setLightboxItem] = useState<PhotoSubmission | null>(
     null,
   );

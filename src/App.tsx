@@ -32,7 +32,8 @@ function AppInner() {
                 flexDirection: "column",
                 paddingLeft: "12px",
                 paddingRight: "12px",
-                paddingBottom: "12px",
+                paddingTop: "12px",
+                paddingBottom: "20px",
               }}
             >
               <h2
@@ -50,9 +51,11 @@ function AppInner() {
               <div
                 style={{
                   width: "100%",
-                  maxWidth: "calc(55dvh * 1152 / 554)",
+                  maxWidth: "calc(42.75dvh * 1152 / 554)",
                   marginInline: "auto",
                   overflow: "hidden",
+                  border: "2px solid white",
+                  borderRadius: "10px",
                 }}
               >
                 <RouteMap
@@ -74,7 +77,7 @@ function AppInner() {
                 Tap a stop to see what happened there
               </p>
             </div>
-            <div style={{ flex: "0 0 auto" }}>
+            <div>
               <InfoPanel
                 onViewGallery={() => dispatch({ type: "OPEN_GALLERY" })}
               />

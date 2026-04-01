@@ -191,7 +191,7 @@ export function PhotoSubmissionForm() {
         <div className={styles.fieldsCol}>
           <div className={styles.field}>
             <label htmlFor={nameId} className={styles.label}>
-              Your name <span aria-hidden="true">*</span>
+              Your name <span className={styles.optional}>(required)</span>
             </label>
             <input
               id={nameId}
@@ -221,7 +221,7 @@ export function PhotoSubmissionForm() {
 
           <div className={styles.field}>
             <label htmlFor={captionId} className={styles.label}>
-              Caption <span aria-hidden="true">*</span>
+              Caption <span className={styles.optional}>(required)</span>
             </label>
             <input
               id={captionId}
@@ -253,8 +253,6 @@ export function PhotoSubmissionForm() {
               ))}
             </select>
           </div>
-
-          <p className={styles.required}>* required</p>
         </div>
       </div>
 

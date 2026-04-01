@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import { routeLegs } from '../../data/routeLegs';
 import { getTruckPosition } from '../../lib/truckInterpolation';
@@ -9,15 +9,29 @@ function toInputValue(d: Date): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
+const UNLOCK_SEQ = ['k', 'r', 'a', 's', 'h'];
+let keyBuffer: string[] = [];
+
 export function DebugClock() {
   const { state, dispatch } = useAppContext();
   const [inputVal, setInputVal] = useState(() =>
     toInputValue(state.debugNow ?? new Date()),
   );
   const [open, setOpen] = useState(false);
+  const [unlocked, setUnlocked] = useState(() => import.meta.env.DEV);
 
-  // Compile-time constant — hooks are always called before this return
-  if (!import.meta.env.DEV) return null;
+  useEffect(() => {
+    function onKeyDown(e: KeyboardEvent) {
+      keyBuffer = [...keyBuffer, e.key.toLowerCase()].slice(-UNLOCK_SEQ.length);
+      if (keyBuffer.join('') === UNLOCK_SEQ.join('')) {
+        setUnlocked((u) => !u);
+      }
+    }
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, []);
+
+  if (!unlocked) return null;
 
   const effectiveNow = state.debugNow ?? new Date();
   const pos = getTruckPosition(routeLegs, effectiveNow);

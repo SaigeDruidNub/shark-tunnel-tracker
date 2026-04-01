@@ -43,57 +43,57 @@ function CommunityGalleryCard({
           journey!
         </p>
 
-      <div className={styles.previewGrid}>
-        {isPending &&
-          Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className={styles.previewSkeleton} />
-          ))}
-        {!isPending && previews.length === 0 && (
-          <p className={styles.previewEmpty}>No photos yet!</p>
-        )}
-        {!isPending &&
-          previews.map((item) => {
-            const url = item.image
-              ? sanityImageUrl(item.image)
-                  .width(300)
-                  .height(200)
-                  .fit("crop")
-                  .format("webp")
-                  .url()
-              : item.videoUrl
-                ? toYouTubeThumbnailUrl(item.videoUrl)
-                : null;
-            const isVideo = Boolean(item.videoUrl);
-            return (
-              <button
-                key={item._id}
-                className={styles.previewThumb}
-                onClick={() => setLightboxItem(item)}
-                aria-label={`Enlarge ${item.caption}`}
-              >
-                {url ? (
-                  <>
-                    <img
-                      src={url}
-                      alt={item.caption}
-                      className={styles.previewImg}
-                      loading="lazy"
-                    />
-                    {isVideo && (
-                      <span className={styles.previewVideoOverlay}>▶</span>
-                    )}
-                  </>
-                ) : (
-                  <div className={styles.previewVideo}>▶</div>
-                )}
-              </button>
-            );
-          })}
-      </div>
+        <div className={styles.previewGrid}>
+          {isPending &&
+            Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className={styles.previewSkeleton} />
+            ))}
+          {!isPending && previews.length === 0 && (
+            <p className={styles.previewEmpty}>No photos yet!</p>
+          )}
+          {!isPending &&
+            previews.map((item) => {
+              const url = item.image
+                ? sanityImageUrl(item.image)
+                    .width(300)
+                    .height(200)
+                    .fit("crop")
+                    .format("webp")
+                    .url()
+                : item.videoUrl
+                  ? toYouTubeThumbnailUrl(item.videoUrl)
+                  : null;
+              const isVideo = Boolean(item.videoUrl);
+              return (
+                <button
+                  key={item._id}
+                  className={styles.previewThumb}
+                  onClick={() => setLightboxItem(item)}
+                  aria-label={`Enlarge ${item.caption}`}
+                >
+                  {url ? (
+                    <>
+                      <img
+                        src={url}
+                        alt={item.caption}
+                        className={styles.previewImg}
+                        loading="lazy"
+                      />
+                      {isVideo && (
+                        <span className={styles.previewVideoOverlay}>▶</span>
+                      )}
+                    </>
+                  ) : (
+                    <div className={styles.previewVideo}>▶</div>
+                  )}
+                </button>
+              );
+            })}
+        </div>
 
-      <button className={styles.outlineBtn} onClick={onViewGallery}>
-        View Full Gallery
-      </button>
+        <button className={styles.outlineBtn} onClick={onViewGallery}>
+          View Full Gallery
+        </button>
       </div>
 
       {lightboxItem && (
@@ -109,9 +109,9 @@ function AboutCard() {
       <h3 className={styles.cardTitle}>About This Event</h3>
       <div className={styles.cardContent}>
         <p className={styles.aboutBody}>
-          The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina, KS
-          for the <strong>Kansas KidWind State Challenge</strong> at Tony's Pizza
-          Events Center.
+          The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina,
+          KS for the <strong>Kansas KidWind State Challenge</strong> at Tony's
+          Pizza Events Center.
         </p>
         <p className={styles.aboutDay}>
           <strong>Day 1:</strong> WI → IA → MO

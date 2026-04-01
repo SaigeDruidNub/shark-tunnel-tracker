@@ -17,8 +17,13 @@
   outline: none;
 }
 
-.mapPanel > * {
-  flex: 1 1 auto;
+/* Map wrapper stays its natural content height; InfoPanel wrapper auto by default */
+.mapPanel > :first-child { flex: 0 0 auto; }
+.mapPanel > :last-child  { flex: 0 0 auto; display: flex; flex-direction: column; }
+
+/* Portrait (height > width, non-desktop): InfoPanel fills remaining space */
+@media (orientation: portrait) and (max-width: 899px) {
+  .mapPanel > :last-child  { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 }
 
 .feedPanel {

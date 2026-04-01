@@ -37,10 +37,11 @@ function CommunityGalleryCard({
   return (
     <div className={styles.cardInner}>
       <h3 className={styles.cardTitle}>Community Gallery</h3>
-      <p className={styles.cardSubtitle}>
-        See photos from fans, teachers, and students along the Shark Tunnel's
-        journey!
-      </p>
+      <div className={styles.cardContent}>
+        <p className={styles.cardSubtitle}>
+          See photos from fans, teachers, and students along the Shark Tunnel's
+          journey!
+        </p>
 
       <div className={styles.previewGrid}>
         {isPending &&
@@ -93,6 +94,7 @@ function CommunityGalleryCard({
       <button className={styles.outlineBtn} onClick={onViewGallery}>
         View Full Gallery
       </button>
+      </div>
 
       {lightboxItem && (
         <Lightbox item={lightboxItem} onClose={() => setLightboxItem(null)} />
@@ -105,34 +107,36 @@ function AboutCard() {
   return (
     <div className={styles.cardInner}>
       <h3 className={styles.cardTitle}>About This Event</h3>
-      <p className={styles.aboutBody}>
-        The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina, KS
-        for the <strong>Kansas KidWind State Challenge</strong> at Tony's Pizza
-        Events Center.
-      </p>
-      <p className={styles.aboutDay}>
-        <strong>Day 1:</strong> WI → IA → MO
-      </p>
-      <p className={styles.aboutDay}>
-        <strong>Day 2:</strong> KC → Topeka → Manhattan → Salina
-      </p>
-      <div className={styles.aboutBtns}>
-        <a
-          href="https://www.kidwind.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.outlineBtn}
-        >
-          Learn More
-        </a>
-        <a
-          href="https://kidwind.org/sponsors/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.coralBtn}
-        >
-          Support KidWind
-        </a>
+      <div className={styles.cardContent}>
+        <p className={styles.aboutBody}>
+          The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina, KS
+          for the <strong>Kansas KidWind State Challenge</strong> at Tony's Pizza
+          Events Center.
+        </p>
+        <p className={styles.aboutDay}>
+          <strong>Day 1:</strong> WI → IA → MO
+        </p>
+        <p className={styles.aboutDay}>
+          <strong>Day 2:</strong> KC → Topeka → Manhattan → Salina
+        </p>
+        <div className={styles.aboutBtns}>
+          <a
+            href="https://www.kidwind.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.outlineBtn}
+          >
+            Learn More
+          </a>
+          <a
+            href="https://kidwind.org/sponsors/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.coralBtn}
+          >
+            Support KidWind
+          </a>
+        </div>
       </div>
     </div>
   );

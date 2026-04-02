@@ -1,3 +1,4 @@
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import type { FeedItem } from "../../types/feedItem";
 import styles from "./FeedCard.module.css";
 
@@ -51,7 +52,8 @@ export function FeedCard({ item }: FeedCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Facebook
+                <FaFacebook />
+                <span>Follow on Facebook</span>
               </a>
             )}
             {item.instagramUrl && (
@@ -61,7 +63,8 @@ export function FeedCard({ item }: FeedCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Instagram
+                <FaInstagram />
+                <span>Follow on Instagram</span>
               </a>
             )}
           </div>

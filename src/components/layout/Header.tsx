@@ -118,17 +118,19 @@ export function Header() {
                       {item.label} <span className={styles.caret}>&#8964;</span>
                     </a>
                     <div className={styles.dropdown}>
-                      {item.children.map((child) => (
-                        <a
-                          key={child.label}
-                          href={child.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.dropdownLink}
-                        >
-                          {child.label}
-                        </a>
-                      ))}
+                      <div className={styles.dropdownInner}>
+                        {item.children.map((child) => (
+                          <a
+                            key={child.label}
+                            href={child.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.dropdownLink}
+                          >
+                            {child.label}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ) : (

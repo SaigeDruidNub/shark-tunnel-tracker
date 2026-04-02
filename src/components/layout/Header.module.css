@@ -46,6 +46,9 @@
 /* Desktop nav item wrapper (enables dropdown) */
 .navItem {
   position: relative;
+  /* Extend the hover area downward so the mouse can travel into the dropdown */
+  padding-bottom: 0.5rem;
+  margin-bottom: -0.5rem;
 }
 
 .navItem:hover .dropdown,
@@ -64,14 +67,29 @@
   display: none;
   flex-direction: column;
   position: absolute;
-  top: calc(100% + 4px);
+  /* Flush to the bottom of the link — gap is handled by padding-bottom on .navItem */
+  top: 100%;
   left: 0;
+  /* Invisible top padding acts as a seamless bridge from the trigger to the panel */
+  padding-top: 0.5rem;
+  background: transparent;
+  min-width: 180px;
+  z-index: 200;
+}
+
+/* Inner visual panel, separated so the bridge padding is transparent */
+.dropdown::after {
+  content: '';
+  display: block;
+}
+
+.dropdownInner {
+  display: flex;
+  flex-direction: column;
   background: var(--color-white);
   border: 1px solid var(--color-purple-brand);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  min-width: 180px;
-  z-index: 200;
   overflow: hidden;
 }
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePhotoSubmissions } from "../../hooks/usePhotoSubmissions";
 import { sanityImageUrl } from "../../lib/sanity/imageUrl";
 import type { PhotoSubmission } from "../../types/photoSubmission";
+import { FaFacebook } from "react-icons/fa";
 import { Lightbox } from "../photos/Lightbox";
 import { PhotoSubmissionForm } from "../photos/PhotoSubmissionForm";
 import styles from "./InfoPanel.module.css";
@@ -124,6 +125,15 @@ export function AboutCard() {
         </p>
         <p className={styles.aboutBody}>
           <strong>🎉 Watch the live feed for trivia!</strong>
+          <a
+            href="https://www.facebook.com/share/1Dzf2SK3HX/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.triviaFbLink}
+          >
+            <FaFacebook />
+            Follow the Event
+          </a>
         </p>
         <div className={styles.aboutBtns}>
           <a

@@ -4,7 +4,7 @@ import { Layout } from "./components/layout/Layout";
 import { RouteMap } from "./components/map/RouteMap";
 import { FeedPanel } from "./components/feed/FeedPanel";
 import { StopModal } from "./components/stops/StopModal";
-import { InfoPanel } from "./components/info/InfoPanel";
+import { InfoPanel, AboutCard } from "./components/info/InfoPanel";
 import { AppProvider, useAppContext } from "./context/AppContext";
 import { DebugClock } from "./components/debug/DebugClock";
 
@@ -25,7 +25,10 @@ function AppInner() {
           <>
             <div
               style={{
-                margin: "var(--space-4) 0 0",
+                marginTop: "var(--space-4)",
+                marginInline: "auto",
+                width: "100%",
+                maxWidth: "var(--map-content-max-width)",
                 borderRadius: "12px",
                 background: "#ffffff",
                 display: "flex",
@@ -73,6 +76,17 @@ function AppInner() {
               >
                 Tap a stop to see what happened there
               </p>
+              <div
+                style={{
+                  width: "100%",
+                  maxWidth: "calc(42.75dvh * 1152 / 554)",
+                  marginInline: "auto",
+                  background: "#f4f4f6",
+                  borderRadius: "10px",
+                }}
+              >
+                <AboutCard/>
+              </div>
             </div>
             <div>
               <InfoPanel

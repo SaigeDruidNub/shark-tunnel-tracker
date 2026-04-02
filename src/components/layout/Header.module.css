@@ -154,12 +154,14 @@
 }
 
 .mobileNavLink {
+  display: block;
   font-family: var(--font-display);
   font-size: var(--text-sm);
   font-weight: var(--font-weight-bold);
   color: var(--color-purple-brand);
   text-decoration: none;
   padding: 0.65rem 1.25rem;
+  text-align: left;
   transition: background var(--duration-fast), color var(--duration-fast);
 }
 

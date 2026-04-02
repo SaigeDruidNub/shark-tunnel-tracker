@@ -107,7 +107,10 @@ export function AboutCard() {
   return (
     <div className={styles.cardInner} style={{ height: "auto" }}>
       <h3 className={styles.cardTitle}>About This Event</h3>
-      <div className={styles.cardContent} style={{ justifyContent: "flex-start" }}>
+      <div
+        className={styles.cardContent}
+        style={{ justifyContent: "flex-start" }}
+      >
         <p className={styles.aboutBody}>
           The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina,
           KS for the <strong>Kansas KidWind State Challenge</strong> at Tony's
@@ -118,6 +121,9 @@ export function AboutCard() {
         </p>
         <p className={styles.aboutDay}>
           <strong>Day 2:</strong> KC → Topeka → Manhattan → Salina
+        </p>
+        <p className={styles.aboutBody}>
+          <strong>🎉 Watch the live feed for trivia!</strong>
         </p>
         <div className={styles.aboutBtns}>
           <a

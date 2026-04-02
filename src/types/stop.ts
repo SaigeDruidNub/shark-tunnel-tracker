@@ -11,6 +11,8 @@ export interface Stop {
   svgX: number;
   /** Y position within the SVG viewBox */
   svgY: number;
+  /** When true, the stop is excluded from the map but still appears in dropdowns */
+  hideFromMap?: boolean;
 }
 
 /** Derived state — computed at runtime, not stored */

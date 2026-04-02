@@ -98,4 +98,15 @@ export const stops: Stop[] = [
     svgX: 290,
     svgY: 680,
   },
+  {
+    id: 'on-the-road',
+    order: 0,
+    name: 'On the Road',
+    city: '',
+    state: '',
+    description: 'The shark tunnel is currently in transit between stops.',
+    svgX: 0,
+    svgY: 0,
+    hideFromMap: true,
+  },
 ];

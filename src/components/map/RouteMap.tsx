@@ -113,7 +113,7 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
   return (
     <MapSVG ref={pathRef} travelledLength={travelledLength}>
       {/* Stop markers render first so the truck always paints on top */}
-      {stops.map((stop) => (
+      {stops.filter((s) => !s.hideFromMap).map((stop) => (
         <StopMarker
           key={stop.id}
           stop={stop}

@@ -61,6 +61,7 @@ export const photoSubmission = defineType({
           { title: "Topeka, KS", value: "topeka" },
           { title: "Manhattan, KS", value: "manhattan" },
           { title: "Salina, KS", value: "salina" },
+          { title: "On the Road", value: "on-the-road" },
         ],
       },
     }),

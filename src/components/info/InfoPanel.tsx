@@ -103,11 +103,11 @@ function CommunityGalleryCard({
   );
 }
 
-function AboutCard() {
+export function AboutCard() {
   return (
-    <div className={styles.cardInner}>
+    <div className={styles.cardInner} style={{ height: "auto" }}>
       <h3 className={styles.cardTitle}>About This Event</h3>
-      <div className={styles.cardContent}>
+      <div className={styles.cardContent} style={{ justifyContent: "flex-start" }}>
         <p className={styles.aboutBody}>
           The Shark Wind Tunnel is traveling from Mineral Point, WI to Salina,
           KS for the <strong>Kansas KidWind State Challenge</strong> at Tony's
@@ -159,9 +159,6 @@ export function InfoPanel({ onViewGallery }: InfoPanelProps) {
         </div>
         <div className={styles.card}>
           <CommunityGalleryCard onViewGallery={onViewGallery} />
-        </div>
-        <div className={styles.card}>
-          <AboutCard />
         </div>
       </div>
     </section>

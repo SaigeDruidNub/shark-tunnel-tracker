@@ -99,9 +99,16 @@
 
   /* ── Layout ──────────────────────────────────────────────── */
   --max-width-content: 100%;
+  --map-content-max-width: 1900px;
   --map-panel-min-width: 320px;
   --feed-panel-width: 300px;
   --header-height: 80px;
+}
+
+@media (min-width: 2500px) {
+  :root {
+    --feed-panel-width: 500px;
+  }
 }
 
 /* ── Reset ───────────────────────────────────────────────── */

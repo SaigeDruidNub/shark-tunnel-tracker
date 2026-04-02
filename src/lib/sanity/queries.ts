@@ -61,6 +61,8 @@ export const FEED_POSTS_QUERY = `
     body,
     image,
     videoUrl,
+    facebookUrl,
+    instagramUrl,
     publishedAt,
     relatedStopId
   }
@@ -72,6 +74,8 @@ export interface SanityFeedPost {
   body: string;
   image?: unknown;
   videoUrl?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
   publishedAt: string;
   relatedStopId?: string;
 }

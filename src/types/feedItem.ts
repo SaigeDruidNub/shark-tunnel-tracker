@@ -6,6 +6,10 @@ export interface FeedItem {
   imageUrl?: string;
   /** YouTube URL — optional, shown as an embed instead of a photo */
   videoUrl?: string;
+  /** Facebook post URL — optional, shown as a link button */
+  facebookUrl?: string;
+  /** Instagram post URL — optional, shown as a link button */
+  instagramUrl?: string;
   publishedAt: Date;
   /** If this update is tied to a specific stop, include its Stop.id */
   relatedStopId?: string;

@@ -34,6 +34,8 @@ function toFeedItem(post: SanityFeedPost): FeedItem {
           .url()
       : undefined,
     videoUrl: post.videoUrl ? toEmbedUrl(post.videoUrl) : undefined,
+    facebookUrl: post.facebookUrl,
+    instagramUrl: post.instagramUrl,
     publishedAt: new Date(post.publishedAt),
     relatedStopId: post.relatedStopId,
   };

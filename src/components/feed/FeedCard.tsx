@@ -42,6 +42,30 @@ export function FeedCard({ item }: FeedCardProps) {
           {formatDate(item.publishedAt)}
         </time>
         <p className={styles.body}>{item.body}</p>
+        {(item.facebookUrl || item.instagramUrl) && (
+          <div className={styles.socialLinks}>
+            {item.facebookUrl && (
+              <a
+                href={item.facebookUrl}
+                className={`${styles.socialBtn} ${styles.facebook}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+            )}
+            {item.instagramUrl && (
+              <a
+                href={item.instagramUrl}
+                className={`${styles.socialBtn} ${styles.instagram}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </article>
   );

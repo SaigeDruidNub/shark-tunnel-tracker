@@ -37,6 +37,20 @@ export const feedPost = defineType({
       validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
     }),
     defineField({
+      name: "facebookUrl",
+      title: "Facebook Link",
+      type: "url",
+      description: "Optional: link to a Facebook post.",
+      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
+      name: "instagramUrl",
+      title: "Instagram Link",
+      type: "url",
+      description: "Optional: link to an Instagram post.",
+      validation: (Rule) => Rule.uri({ scheme: ["http", "https"] }),
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
@@ -59,6 +73,7 @@ export const feedPost = defineType({
           { title: "Topeka, KS", value: "topeka" },
           { title: "Manhattan, KS", value: "manhattan" },
           { title: "Salina, KS", value: "salina" },
+          { title: "On the Road", value: "on-the-road" },
         ],
       },
     }),

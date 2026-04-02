@@ -36,6 +36,54 @@
   }
 }
 
+/* Desktop nav item wrapper (enables dropdown) */
+.navItem {
+  position: relative;
+}
+
+.navItem:hover .dropdown,
+.navItem:focus-within .dropdown {
+  display: flex;
+}
+
+.caret {
+  font-size: 0.6em;
+  margin-left: 0.2em;
+  vertical-align: middle;
+}
+
+/* Desktop dropdown panel */
+.dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-brand);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  min-width: 180px;
+  z-index: 200;
+  overflow: hidden;
+}
+
+.dropdownLink {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-purple-brand);
+  text-decoration: none;
+  padding: 0.55rem 1rem;
+  white-space: nowrap;
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+
+.dropdownLink:hover {
+  background: var(--color-purple-brand);
+  color: var(--color-white);
+}
+
 .kidwindLogoLink {
   flex-shrink: 0;
   display: flex;
@@ -116,6 +164,63 @@
 }
 
 .mobileNavLink:hover {
+  background: var(--color-purple-brand);
+  color: var(--color-white);
+}
+
+/* Mobile accordion toggle button */
+.mobileNavToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-purple-brand);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.65rem 1.25rem;
+  text-align: left;
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+
+.mobileNavToggle:hover {
+  background: var(--color-purple-brand);
+  color: var(--color-white);
+}
+
+.mobileCaret {
+  font-size: 0.75em;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+
+.mobileCaretOpen {
+  transform: rotate(180deg);
+}
+
+/* Mobile sub-menu indented links */
+.mobileSubMenu {
+  display: flex;
+  flex-direction: column;
+  background: rgba(46, 27, 105, 0.05);
+  border-left: 3px solid var(--color-purple-brand);
+  margin-left: 1.25rem;
+}
+
+.mobileSubLink {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-purple-brand);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+
+.mobileSubLink:hover {
   background: var(--color-purple-brand);
   color: var(--color-white);
 }

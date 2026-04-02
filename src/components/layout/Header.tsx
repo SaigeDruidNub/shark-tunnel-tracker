@@ -1,4 +1,12 @@
 import { useState } from "react";
+import {
+  FaBolt,
+  FaHammer,
+  FaMedal,
+  FaShoppingCart,
+  FaUser,
+} from "react-icons/fa";
+import { GiTrophy } from "react-icons/gi";
 import kidwindLogo from "../../assets/kidwind-favicon.png";
 import { siteContent } from "../../data/siteContent";
 import styles from "./Header.module.css";
@@ -85,11 +93,6 @@ const NAV_ITEMS: NavItem[] = [
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [mobileOpenItem, setMobileOpenItem] = useState<string | null>(null);
-
-  function toggleMobileItem(label: string) {
-    setMobileOpenItem((prev) => (prev === label ? null : label));
-  }
 
   return (
     <header className={styles.header} role="banner">
@@ -99,84 +102,115 @@ export function Header() {
           <span className={styles.titleLine2}>Tracker</span>
         </div>
 
-        {/* Desktop nav */}
-        <nav className={styles.kidwindNav} aria-label="KidWind navigation">
-          {NAV_ITEMS.map((item) =>
-            item.children ? (
-              <div key={item.label} className={styles.navItem}>
-                <a
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.kidwindNavLink}
-                >
-                  {item.label} <span className={styles.caret}>▾</span>
-                </a>
-                <div className={styles.dropdown}>
-                  {item.children.map((child) => (
+        <div className={styles.navGroup}>
+          {/* Desktop nav — all items except Support Us */}
+          <nav className={styles.kidwindNav} aria-label="KidWind navigation">
+            {NAV_ITEMS.filter((item) => item.label !== "Support Us").map(
+              (item) =>
+                item.children ? (
+                  <div key={item.label} className={styles.navItem}>
                     <a
-                      key={child.label}
-                      href={child.href}
+                      href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={styles.dropdownLink}
+                      className={styles.kidwindNavLink}
                     >
-                      {child.label}
+                      {item.label} <span className={styles.caret}>&#8964;</span>
                     </a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.kidwindNavLink}
-              >
-                {item.label}
-              </a>
-            ),
-          )}
-        </nav>
+                    <div className={styles.dropdown}>
+                      {item.children.map((child) => (
+                        <a
+                          key={child.label}
+                          href={child.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.dropdownLink}
+                        >
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.kidwindNavLink}
+                  >
+                    {item.label}
+                  </a>
+                ),
+            )}
+          </nav>
 
-        <div className={styles.rightSlot}>
-          {/* Hamburger — mobile only */}
-          <button
-            className={styles.hamburger}
-            aria-label={menuOpen ? "Close menu" : "Open KidWind menu"}
-            aria-expanded={menuOpen}
-            aria-controls="kidwind-mobile-menu"
-            onClick={() => {
-              setMenuOpen((o) => !o);
-              setMobileOpenItem(null);
-            }}
-          >
-            <span
-              className={`${styles.bar} ${menuOpen ? styles.barTop : ""}`}
-            />
-            <span
-              className={`${styles.bar} ${menuOpen ? styles.barMid : ""}`}
-            />
-            <span
-              className={`${styles.bar} ${menuOpen ? styles.barBot : ""}`}
-            />
-          </button>
+          <div className={styles.rightSlot}>
+            {/* Cart + Dashboard icons — desktop only */}
+            <a
+              href="https://kidwind.org/shop/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+              aria-label="KidWind Shop"
+            >
+              <FaShoppingCart />
+            </a>
+            <a
+              href="https://kidwind.org/kidwind-dashboard/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.iconLink}
+              aria-label="KidWind Dashboard"
+            >
+              <FaUser />
+            </a>
 
-          {/* Logo */}
-          <a
-            href="https://kidwind.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.kidwindLogoLink}
-          >
-            <img
-              src={kidwindLogo}
-              alt="KidWind.org"
-              className={styles.kidwindLogo}
-            />
-          </a>
+            {/* Support Us button — desktop only */}
+            <a
+              href="https://kidwind.org/sponsors/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.supportBtn}
+            >
+              Support Us
+            </a>
+
+            {/* Hamburger — mobile only */}
+            <button
+              className={styles.hamburger}
+              aria-label={menuOpen ? "Close menu" : "Open KidWind menu"}
+              aria-expanded={menuOpen}
+              aria-controls="kidwind-mobile-menu"
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <span
+                className={`${styles.bar} ${menuOpen ? styles.barTop : ""}`}
+              />
+              <span
+                className={`${styles.bar} ${menuOpen ? styles.barMid : ""}`}
+              />
+              <span
+                className={`${styles.bar} ${menuOpen ? styles.barBot : ""}`}
+              />
+            </button>
+
+            {/* Logo */}
+            <a
+              href="https://kidwind.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.kidwindLogoLink}
+            >
+              <img
+                src={kidwindLogo}
+                alt="KidWind.org"
+                className={styles.kidwindLogo}
+              />
+            </a>
+          </div>
         </div>
+        {/* end navGroup */}
       </div>
 
       {/* Mobile dropdown */}
@@ -186,64 +220,77 @@ export function Header() {
           className={styles.mobileMenu}
           aria-label="KidWind navigation"
         >
-          {NAV_ITEMS.map((item) =>
-            item.children ? (
-              <div key={item.label}>
-                <button
-                  className={styles.mobileNavToggle}
-                  aria-expanded={mobileOpenItem === item.label}
-                  onClick={() => toggleMobileItem(item.label)}
-                >
-                  {item.label}
-                  <span
-                    className={`${styles.mobileCaret} ${
-                      mobileOpenItem === item.label
-                        ? styles.mobileCaretOpen
-                        : ""
-                    }`}
-                  >
-                    ▾
-                  </span>
-                </button>
-                {mobileOpenItem === item.label && (
-                  <div className={styles.mobileSubMenu}>
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.mobileSubLink}
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      All {item.label}
-                    </a>
-                    {item.children.map((child) => (
-                      <a
-                        key={child.label}
-                        href={child.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.mobileSubLink}
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        {child.label}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
+          {/* 2×2 feature grid */}
+          <div className={styles.mobileGrid}>
+            {(
+              [
+                [
+                  <FaMedal />,
+                  "KidWind Challenges",
+                  "https://kidwind.org/challenges/",
+                ],
+                [
+                  <FaHammer />,
+                  "Teacher Trainings",
+                  "https://kidwind.org/training/",
+                ],
+                [
+                  <GiTrophy />,
+                  "Classroom Activities",
+                  "https://kidwind.org/activities/",
+                ],
+                [<FaBolt />, "About KidWind", "https://kidwind.org/about/"],
+              ] as [React.ReactNode, string, string][]
+            ).map(([icon, label, href]) => (
               <a
-                key={item.label}
-                href={item.href}
+                key={label}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.mobileNavLink}
+                className={styles.mobileGridCard}
                 onClick={() => setMenuOpen(false)}
               >
-                {item.label}
+                <span className={styles.mobileGridIcon}>{icon}</span>
+                <span>{label}</span>
               </a>
-            ),
-          )}
+            ))}
+          </div>
+
+          {/* Shop CTA */}
+          <a
+            href="https://kidwind.org/shop/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.mobileShopBtn}
+            onClick={() => setMenuOpen(false)}
+          >
+            Get KidWind Gear
+          </a>
+
+          {/* Secondary links */}
+          <div className={styles.mobileSecondaryLinks}>
+            {(
+              [
+                ["KidWind Dashboard", "https://kidwind.org/kidwind-dashboard/"],
+                ["Who We Are", "https://kidwind.org/about/"],
+                ["News", "https://kidwind.org/news/"],
+                ["Contact Form", "https://kidwind.org/contact/"],
+                ["Jobs", "https://kidwind.org/jobs/"],
+                ["Support Us", "https://kidwind.org/sponsors/"],
+              ] as [string, string][]
+            ).map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileSecondaryLink}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </nav>
       )}
 

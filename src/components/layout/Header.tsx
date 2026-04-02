@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  FaBolt,
-  FaHammer,
-  FaMedal,
-  FaShoppingCart,
-  FaUser,
-} from "react-icons/fa";
+import { FaBolt, FaHammer, FaMedal } from "react-icons/fa";
 import { GiTrophy } from "react-icons/gi";
 import kidwindLogo from "../../assets/kidwind-favicon.png";
 import { siteContent } from "../../data/siteContent";
@@ -148,26 +142,6 @@ export function Header() {
           </nav>
 
           <div className={styles.rightSlot}>
-            {/* Cart + Dashboard icons — desktop only */}
-            <a
-              href="https://kidwind.org/shop/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.iconLink}
-              aria-label="KidWind Shop"
-            >
-              <FaShoppingCart />
-            </a>
-            <a
-              href="https://kidwind.org/kidwind-dashboard/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.iconLink}
-              aria-label="KidWind Dashboard"
-            >
-              <FaUser />
-            </a>
-
             {/* Support Us button — desktop only */}
             <a
               href="https://kidwind.org/sponsors/"

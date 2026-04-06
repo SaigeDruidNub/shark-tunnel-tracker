@@ -5,13 +5,34 @@ import { schemaTypes } from "./schemas";
 
 const stops = [
   { id: "mineral-point", order: 1, name: "Mineral Point", state: "WI" },
-  { id: "dubuque", order: 2, name: "Dubuque", state: "IA" },
-  { id: "cedar-rapids", order: 3, name: "Cedar Rapids", state: "IA" },
-  { id: "des-moines", order: 4, name: "Des Moines", state: "IA" },
-  { id: "kansas-city", order: 5, name: "Kansas City", state: "MO" },
-  { id: "topeka", order: 6, name: "Topeka", state: "KS" },
-  { id: "manhattan", order: 7, name: "Manhattan", state: "KS" },
-  { id: "salina", order: 8, name: "Salina", state: "KS" },
+  { id: "eagle-point-park", order: 2, name: "Eagle Point Park", state: "IA" },
+  {
+    id: "van-buren-elementary",
+    order: 3,
+    name: "Van Buren Elementary",
+    state: "IA",
+  },
+  {
+    id: "science-center-iowa",
+    order: 4,
+    name: "Science Center of Iowa",
+    state: "IA",
+  },
+  {
+    id: "national-wwi-museum",
+    order: 5,
+    name: "National WWI Museum",
+    state: "MO",
+  },
+  { id: "elmont-elementary", order: 6, name: "Elmont Elementary", state: "KS" },
+  { id: "logan-elementary", order: 7, name: "Logan Elementary", state: "KS" },
+  {
+    id: "woodrow-wilson-elementary",
+    order: 8,
+    name: "Woodrow Wilson Elementary",
+    state: "KS",
+  },
+  { id: "salina", order: 9, name: "Salina", state: "KS" },
 ];
 
 export default defineConfig({

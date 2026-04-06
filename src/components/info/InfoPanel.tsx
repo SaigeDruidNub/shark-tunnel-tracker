@@ -137,7 +137,7 @@ export function AboutCard() {
         </p>
         <div className={styles.aboutBtns}>
           <a
-            href="https://www.kidwind.org"
+            href="https://kansasenergyprogram.org/educators/kidwind-challenge"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.outlineBtn}

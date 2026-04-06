@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { FaBolt, FaHammer, FaMedal } from "react-icons/fa";
 import { GiTrophy } from "react-icons/gi";
-import kidwindLogo from "../../assets/kidwind-favicon.png";
+import kidwindFavicon from "../../assets/kidwind-favicon.png";
+import kidwindWordmark from "../../assets/kidwind-logo.png";
 import { siteContent } from "../../data/siteContent";
 import styles from "./Header.module.css";
 
@@ -171,7 +172,7 @@ export function Header() {
               />
             </button>
 
-            {/* Logo */}
+            {/* Logo favicon */}
             <a
               href="https://kidwind.org"
               target="_blank"
@@ -179,9 +180,23 @@ export function Header() {
               className={styles.kidwindLogoLink}
             >
               <img
-                src={kidwindLogo}
+                src={kidwindFavicon}
                 alt="KidWind.org"
                 className={styles.kidwindLogo}
+              />
+            </a>
+
+            {/* KidWind wordmark — far right */}
+            <a
+              href="https://kidwind.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.wordmarkLink}
+            >
+              <img
+                src={kidwindWordmark}
+                alt="KidWind"
+                className={styles.wordmark}
               />
             </a>
           </div>

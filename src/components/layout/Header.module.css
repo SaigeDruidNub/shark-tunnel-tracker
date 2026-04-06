@@ -352,6 +352,19 @@
   gap: 0;
 }
 
+.wordmarkLink {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+
+.wordmark {
+  height: 2rem;
+  width: auto;
+  display: block;
+}
+
 .titleLine1 {
   font-family: var(--font-display);
   font-size: 1.95rem;

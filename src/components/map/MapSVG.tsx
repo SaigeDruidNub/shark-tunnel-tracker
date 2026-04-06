@@ -17,8 +17,10 @@ interface MapSVGProps {
  * pathEl.getTotalLength() and pathEl.getPointAtLength() for truck positioning.
  *
  * Stop coordinates in src/data/stops.ts must match pixel positions on the PNG.
- * Route: Mineral Point, WI → Dubuque → Cedar Rapids → Des Moines → Kansas City
- *        → Topeka → Manhattan → Salina, KS
+ * Route: Mineral Point, WI → Eagle Point Park (Dubuque, IA) → Van Buren Elementary (IA)
+ *        → Science Center of Iowa (Des Moines) → National WWI Museum (KC, MO)
+ *        → Logan Elementary (KC, KS) → Elmont Elementary (KS)
+ *        → Woodrow Wilson Elementary (Abilene, KS) → Salina, KS
  */
 const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
   { children, travelledLength = 0 },
@@ -27,7 +29,7 @@ const MapSVG = forwardRef<SVGPathElement, MapSVGProps>(function MapSVG(
   // Coordinates mirror svgX/svgY in src/data/stops.ts.
   // Update both together whenever stop positions change.
   const routeD =
-    "M905 243 L875 285 L783 345 L630 387 L545 658 L440 680 L378 635 L290 680";
+    "M905 243 L868 281 L719 335 L628 387 L552 670 L520 680 L439 650 L341 688 L290 680";
 
   return (
     <svg

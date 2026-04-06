@@ -9,30 +9,32 @@ import { TruckMarker } from "./TruckMarker";
 import type { StopStatus } from "../../types/stop";
 
 /**
- * Fractional positions [0..1] along the route path at each of the 8 stops.
+ * Fractional positions [0..1] along the route path at each of the 9 stops.
  * Precomputed from MapSVG's route D string (mapBackground.png, 1152 × 922):
- * M905 243 L875 285 L783 345 L630 387 L545 658 L440 680 L378 635 L290 680
+ * M905 243 L868 281 L719 335 L628 387 L552 670 L520 680 L439 650 L341 688 L290 680
  *
  * Segment lengths (Euclidean — exact for straight-line L commands):
- *   0→1 (mineral-point→dubuque):   ≈ 51.6
- *   1→2 (dubuque→cedar-rapids):    ≈109.8
- *   2→3 (cedar-rapids→des-moines): ≈158.7
- *   3→4 (des-moines→kansas-city):  ≈284.0
- *   4→5 (kansas-city→topeka):      ≈107.3
- *   5→6 (topeka→manhattan):        ≈ 76.6
- *   6→7 (manhattan→salina):        ≈ 98.8
- *   Total ≈ 886.8
+ *   0→1 (mineral-point→eagle-point-park):          ≈  53.0
+ *   1→2 (eagle-point-park→van-buren-elementary):   ≈ 158.5
+ *   2→3 (van-buren-elementary→science-center-iowa):≈ 104.8
+ *   3→4 (science-center-iowa→national-wwi-museum): ≈ 293.0
+ *   4→5 (national-wwi-museum→elmont-elementary):   ≈  33.5
+ *   5→6 (elmont-elementary→logan-elementary):      ≈  86.4
+ *   6→7 (logan-elementary→woodrow-wilson):         ≈ 105.1
+ *   7→8 (woodrow-wilson→salina):                   ≈  51.6
+ *   Total ≈ 885.9
  *
- * Cumulative fractions at each stop (stops[0..7]):
+ * Cumulative fractions at each stop (stops[0..8]):
  */
 const STOP_PATH_FRACTIONS: readonly number[] = [
-  0, // mineral-point  (0)
-  0.058, // dubuque        ( 51.6 / 886.8)
-  0.182, // cedar-rapids   (161.4 / 886.8)
-  0.361, // des-moines     (320.1 / 886.8)
-  0.681, // kansas-city    (604.1 / 886.8)
-  0.802, // topeka         (711.4 / 886.8)
-  0.889, // manhattan      (788.0 / 886.8)
+  0, // mineral-point          (0)
+  0.06, // eagle-point-park       ( 53.0 / 885.9)
+  0.239, // van-buren-elementary   (211.5 / 885.9)
+  0.357, // science-center-iowa    (316.3 / 885.9)
+  0.688, // national-wwi-museum    (609.3 / 885.9)
+  0.726, // elmont-elementary      (642.8 / 885.9)
+  0.823, // logan-elementary       (729.2 / 885.9)
+  0.942, // woodrow-wilson         (834.3 / 885.9)
   1.0, // salina
 ];
 
@@ -113,14 +115,16 @@ export function RouteMap({ selectedStopId, onStopClick }: RouteMapProps) {
   return (
     <MapSVG ref={pathRef} travelledLength={travelledLength}>
       {/* Stop markers render first so the truck always paints on top */}
-      {stops.filter((s) => !s.hideFromMap).map((stop) => (
-        <StopMarker
-          key={stop.id}
-          stop={stop}
-          status={getStopStatus(stop.order, stop.id)}
-          onClick={() => onStopClick(stop.id)}
-        />
-      ))}
+      {stops
+        .filter((s) => !s.hideFromMap)
+        .map((stop) => (
+          <StopMarker
+            key={stop.id}
+            stop={stop}
+            status={getStopStatus(stop.order, stop.id)}
+            onClick={() => onStopClick(stop.id)}
+          />
+        ))}
       <TruckMarker
         x={truckPoint.x}
         y={truckPoint.y}

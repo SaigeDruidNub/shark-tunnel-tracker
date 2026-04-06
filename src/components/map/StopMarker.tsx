@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Stop, StopStatus } from "../../types/stop";
 import styles from "./StopMarker.module.css";
 
@@ -18,6 +19,8 @@ const STATUS_COLORS: Record<
 
 export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
   const { outer, inner, text } = STATUS_COLORS[status];
+  const [hovered, setHovered] = useState(false);
+  const showLabel = hovered || status === "active";
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -35,6 +38,8 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
       tabIndex={0}
       onClick={onClick}
       onKeyDown={handleKeyDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       transform={`translate(${stop.svgX} ${stop.svgY})`}
     >
       {/* Active pulse ring */}
@@ -83,40 +88,44 @@ export function StopMarker({ stop, status, onClick }: StopMarkerProps) {
         {stop.order}
       </text>
 
-      {/* City label — rendered twice: white outline behind, black text on top */}
-      <text
-        x={18}
-        dy="1"
-        style={{
-          fontFamily: "Inter, Arial, sans-serif",
-          fontWeight: 700,
-          fontSize: 15,
-          fill: "none",
-          stroke: "white",
-          strokeWidth: 4,
-          strokeLinejoin: "round",
-          dominantBaseline: "middle",
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-      >
-        {stop.name}
-      </text>
-      <text
-        x={18}
-        dy="1"
-        style={{
-          fontFamily: "Inter, Arial, sans-serif",
-          fontWeight: 700,
-          fontSize: 15,
-          fill: "#1d1d1d",
-          dominantBaseline: "middle",
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-      >
-        {stop.name}
-      </text>
+      {/* City label — only visible on hover or when selected */}
+      {showLabel && (
+        <>
+          <text
+            x={18}
+            dy="1"
+            style={{
+              fontFamily: "Inter, Arial, sans-serif",
+              fontWeight: 700,
+              fontSize: 15,
+              fill: "none",
+              stroke: "white",
+              strokeWidth: 4,
+              strokeLinejoin: "round",
+              dominantBaseline: "middle",
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
+          >
+            {stop.name}
+          </text>
+          <text
+            x={18}
+            dy="1"
+            style={{
+              fontFamily: "Inter, Arial, sans-serif",
+              fontWeight: 700,
+              fontSize: 15,
+              fill: "#1d1d1d",
+              dominantBaseline: "middle",
+              pointerEvents: "none",
+              userSelect: "none",
+            }}
+          >
+            {stop.name}
+          </text>
+        </>
+      )}
     </g>
   );
 }
